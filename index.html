@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fractional Executive | Strategy, Operations & AI Leadership</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Executive Advisory</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="framework.html">Framework</a></li>
+                <li><a href="framework.html#assessment">Assessment</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>You Built the Business. Let's Make Sure It Doesn't Break You.</h1>
+                <p class="subtitle">Fractional Operations & Technology Executive</p>
+                <p class="tagline">30+ years navigating acquisitions, economic crises, and operational meltdowns. Now helping leaders like you get through the challenges that feel impossible.</p>
+                <div class="hero-buttons">
+                    <a href="contact.html" class="cta-button">Start a Conversation</a>
+                    <a href="framework.html#assessment" class="cta-button secondary">Take the Assessment</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <a href="framework.html" class="hero-graphic">
+                    <div class="hero-graphic-text">
+                        <p class="framework">My Framework</p>
+                        <p class="framework-name">Leading with<br>Heart & Head</p>
+                        <p class="click-hint">Click to learn more</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="assessment-cta">
+        <div class="assessment-cta-container">
+            <h2>How Balanced Is Your Leadership?</h2>
+            <p class="lead">Take the Heart & Head Leadership Assessment</p>
+            <p>Discover where your organization stands on both dimensions of effective leadership. This quick assessment reveals your strengths and identifies opportunities for growth.</p>
+            <a href="framework.html#assessment" class="cta-button">Start Free Assessment</a>
+            <div class="assessment-benefits">
+                <div class="benefit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span>2-minute assessment</span>
+                </div>
+                <div class="benefit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span>Instant visual results</span>
+                </div>
+                <div class="benefit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span>Personalized insights</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2026 All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="framework.html">Framework</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script>
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

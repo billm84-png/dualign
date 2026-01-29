@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart & Head Framework | Fractional Executive Advisory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Executive Advisory</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="framework.html" class="active">Framework</a></li>
+                <li><a href="framework.html#assessment">Assessment</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Leading with Heart & Head</h1>
+        <p>A balanced approach to transformational leadership</p>
+    </div>
+
+    <section class="framework-section">
+        <div class="framework-container">
+            <p class="subtitle">The most effective leaders combine emotional intelligence with analytical rigor. This framework guides how I approach every engagement.</p>
+            <div class="framework-pillars">
+                <div class="pillar">
+                    <h3><span class="pillar-icon">&#9829;</span> Heart</h3>
+                    <p>Authentic leadership starts with genuine connection. Building trust, developing people, and creating environments where teams thrive. The emotional intelligence to inspire and the courage to make difficult decisions with compassion.</p>
+                    <ul style="margin-top: 1rem; opacity: 0.9; font-size: 0.9rem; padding-left: 1.25rem;">
+                        <li>Psychological safety</li>
+                        <li>Trust and authenticity</li>
+                        <li>People development</li>
+                        <li>Empathetic communication</li>
+                        <li>Change leadership</li>
+                    </ul>
+                </div>
+                <div class="pillar">
+                    <h3><span class="pillar-icon">&#9881;</span> Head</h3>
+                    <p>Rigorous analysis drives sound decisions. Data-informed strategy, systematic execution, and continuous optimization. The discipline to measure what matters and the clarity to communicate complex ideas simply.</p>
+                    <ul style="margin-top: 1rem; opacity: 0.9; font-size: 0.9rem; padding-left: 1.25rem;">
+                        <li>Data-driven decisions</li>
+                        <li>Strategic clarity</li>
+                        <li>Operating rhythms</li>
+                        <li>Process optimization</li>
+                        <li>Accountability systems</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="assessment" class="assessment-cta">
+        <div class="assessment-cta-container">
+            <h2>How Balanced Is Your Leadership?</h2>
+            <p class="lead">Take the Heart & Head Leadership Assessment</p>
+            <p>Discover where your organization stands on both dimensions of effective leadership. This quick assessment reveals your strengths and identifies opportunities for growth.</p>
+            <button class="cta-button" onclick="openAssessment()">Start Free Assessment</button>
+            <div class="assessment-benefits">
+                <div class="benefit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span>2-minute assessment</span>
+                </div>
+                <div class="benefit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span>Instant visual results</span>
+                </div>
+                <div class="benefit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span>Personalized insights</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2026 All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="framework.html">Framework</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Assessment Modal -->
+    <div class="modal-overlay" id="assessmentModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeAssessment()">&times;</button>
+            <div class="modal-content">
+
+                <!-- Step 0: Intro -->
+                <div class="assessment-step active" id="step-intro">
+                    <div class="assessment-intro">
+                        <h2>Heart & Head Leadership Assessment</h2>
+                        <p>Discover how your organization balances people-centered leadership with analytical rigor.</p>
+
+                        <div class="assessment-preview">
+                            <div class="preview-item">
+                                <div class="preview-icon heart">&#9829;</div>
+                                <span>Heart</span>
+                            </div>
+                            <div class="preview-item">
+                                <div class="preview-icon head">&#9881;</div>
+                                <span>Head</span>
+                            </div>
+                        </div>
+
+                        <div class="assessment-meta">
+                            <span>10 questions</span>
+                            <span>~2 minutes</span>
+                            <span>Instant results</span>
+                        </div>
+
+                        <button class="cta-button" onclick="startAssessment()">Begin Assessment</button>
+                    </div>
+                </div>
+
+                <!-- Questions Container -->
+                <div class="assessment-step" id="step-questions">
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span id="questionNumber">Question 1 of 10</span>
+                            <span id="categoryLabel"></span>
+                        </div>
+                    </div>
+
+                    <div class="question-container">
+                        <div class="question-category" id="questionCategory">
+                            <span id="categoryIcon"></span>
+                            <span id="categoryText"></span>
+                        </div>
+                        <h3 class="question-text" id="questionText"></h3>
+
+                        <div class="rating-scale" id="ratingScale">
+                            <!-- Rating options generated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button class="nav-button back" id="backBtn" onclick="previousQuestion()">Back</button>
+                        <button class="nav-button next" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+                    </div>
+                </div>
+
+                <!-- Lead Capture -->
+                <div class="assessment-step" id="step-lead">
+                    <div class="lead-capture">
+                        <h2>Your Results Are Ready!</h2>
+                        <p class="subtitle">Enter your details to see your personalized Heart & Head profile.</p>
+
+                        <form class="lead-form" id="leadForm" onsubmit="submitLead(event)">
+                            <div class="form-group">
+                                <input type="text" id="leadName" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="leadEmail" placeholder="Work Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="leadCompany" placeholder="Company Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="leadRole" placeholder="Your Role">
+                            </div>
+                            <button type="submit">See My Results</button>
+                        </form>
+                        <p class="privacy-note">Your information is kept confidential and never shared.</p>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="assessment-step" id="step-results">
+                    <div class="results-container">
+                        <h2>Your Leadership Profile</h2>
+                        <p class="results-subtitle" id="resultsGreeting">Here's how your organization balances Heart and Head</p>
+
+                        <div class="quadrant-chart">
+                            <div class="axis-line horizontal"></div>
+                            <div class="axis-line vertical"></div>
+                            <div class="quadrant top-left"><span>High Heart<br>Low Head</span></div>
+                            <div class="quadrant top-right"><span>Balanced<br>Leadership</span></div>
+                            <div class="quadrant bottom-left"><span>Growth<br>Opportunity</span></div>
+                            <div class="quadrant bottom-right"><span>High Head<br>Low Heart</span></div>
+                            <div class="result-dot" id="resultDot"></div>
+                            <div class="axis-label head-label">HEAD &rarr;</div>
+                            <div class="axis-label heart-label">HEART &rarr;</div>
+                        </div>
+
+                        <div class="scores-display">
+                            <div class="score-item">
+                                <div class="score-circle heart" id="heartScoreDisplay">0</div>
+                                <div class="score-label">Heart Score</div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-circle head" id="headScoreDisplay">0</div>
+                                <div class="score-label">Head Score</div>
+                            </div>
+                        </div>
+
+                        <div class="insights-card">
+                            <span class="profile-type" id="profileType">Balanced Leader</span>
+                            <h3>&#128161; Your Insights</h3>
+                            <p id="insightsText">Based on your responses, here are key observations about your organization's leadership balance.</p>
+                        </div>
+
+                        <div class="results-cta">
+                            <p>Want to explore how to strengthen your leadership approach?</p>
+                            <a href="contact.html" class="cta-button" onclick="closeAssessment()">Schedule a Conversation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assessment.js"></script>
+    <script>
+        // Auto-open assessment if URL has #assessment hash
+        if (window.location.hash === '#assessment') {
+            setTimeout(openAssessment, 300);
+        }
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Fractional Executive Advisory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Executive Advisory</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="framework.html">Framework</a></li>
+                <li><a href="framework.html#assessment">Assessment</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Bill Maggio</h1>
+        <p>Fractional Executive & Strategic Advisor</p>
+    </div>
+
+    <section class="about">
+        <div class="about-container">
+            <div class="about-content">
+                <div class="about-sidebar">
+                    <div class="headshot-container">
+                        <img src="headshot.jpg" alt="Bill Maggio" class="headshot">
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <div class="stat-number">30+</div>
+                            <div class="stat-label">Years in the Arena</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">CEO</div>
+                            <div class="stat-label">C-Suite Leadership</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>I've Sat in Your Chair</h3>
+                    <p>I've spent more than 30 years building businesses, navigating crises, and leading teams through the kinds of challenges that don't come with a playbook.</p>
+                    <p>My executive career spans roles as founder, operations leader, CTO, and CEO of GP Strategies, a global workforce transformation company. I've led organizations through acquisitions, economic downturns, and operational meltdowns. I've made the 3am decisions that couldn't wait until morning and walked into rooms where everyone expected answers I didn't have yet.</p>
+                    <p>Today, I partner with Boards, CEOs, founders, and executive teams at small and mid-sized companies who are navigating growth, transformation, or transition. My fractional executive practice provides senior-level strategic guidance without the commitment or cost of a full-time hire.</p>
+
+                    <h3>Leading with Heart and Head</h3>
+                    <p>My approach centers on a belief that the most effective leaders combine emotional intelligence with analytical rigor. I help organizations build strategic clarity, establish sustainable operating rhythms, and develop practical AI fluency that drives competitive advantage.</p>
+                    <p>My areas of focus include strategic planning and execution, leadership operating rhythms, AI adoption for enterprise, board services (including Government Security Committee roles for FOCI-mitigated companies), and executive coaching and mentoring.</p>
+
+                    <h3>Now in Your Corner</h3>
+                    <p>I know what it's like when the forecast doesn't add up, when the team is looking to you for direction, and when the weight of the business feels like it's yours alone to carry. I bring battle-tested experience and practical frameworks to help leaders get through the challenges that feel impossible.</p>
+
+                    <div class="credentials">
+                        <span class="credential">C-Suite Leadership</span>
+                        <span class="credential">Digital Transformation</span>
+                        <span class="credential">M&A Integration</span>
+                        <span class="credential">Crisis Management</span>
+                        <span class="credential">AI Implementation</span>
+                        <span class="credential">Board Governance</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="assessment-cta">
+        <div class="assessment-cta-container">
+            <h2>Discover Your Leadership Balance</h2>
+            <p class="lead">Take the Heart & Head Assessment</p>
+            <p>Find out how your organization balances people-centered leadership with analytical discipline.</p>
+            <a href="framework.html#assessment" class="cta-button">Start Free Assessment</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2026 All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="framework.html">Framework</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script>
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
