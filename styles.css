@@ -330,6 +330,31 @@ section {
     box-shadow: 0 10px 40px rgba(26, 54, 93, 0.15);
 }
 
+.linkedin-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #0A66C2;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.linkedin-link:hover {
+    background: #004182;
+    transform: translateY(-2px);
+}
+
+.linkedin-link svg {
+    width: 18px;
+    height: 18px;
+}
+
 .about-stats {
     display: flex;
     flex-direction: column;
