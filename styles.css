@@ -666,6 +666,20 @@ footer p {
     font-size: 0.9rem;
 }
 
+.footer-brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    opacity: 1;
+    margin-bottom: 0.25rem;
+}
+
+.footer-brand .tagline {
+    font-weight: 400;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-left: 0.5rem;
+}
+
 /* Assessment Modal */
 .modal-overlay {
     display: none;
