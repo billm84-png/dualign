@@ -597,9 +597,48 @@ section {
     margin-bottom: 3rem;
 }
 
-.contact-intro p {
+.contact-intro > p {
     color: var(--text-medium);
     font-size: 1.1rem;
+}
+
+.contact-direct {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+
+.contact-direct > p {
+    color: var(--text-medium);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.contact-methods {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.contact-method {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.05rem;
+    transition: color 0.2s;
+}
+
+.contact-method:hover {
+    color: var(--accent);
+}
+
+.contact-method svg {
+    width: 20px;
+    height: 20px;
 }
 
 .contact-form {
@@ -1062,6 +1101,28 @@ footer p {
     font-size: 0.8rem;
     color: var(--text-light);
     margin-top: 1rem;
+}
+
+/* Checkbox styling for lead form */
+.checkbox-group {
+    text-align: left;
+    margin-top: 0.5rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: var(--text-medium);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent);
+    cursor: pointer;
 }
 
 /* Results */

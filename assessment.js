@@ -1,3 +1,6 @@
+// Google Apps Script Web App URL
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkmFC0nt4N0U7Bxhb_b_0g128wkbv9rbr5xvo43WINbn-EjFDGMvvA4f9XbfbR2c5RIw/exec';
+
 // Assessment Questions
 const questions = [
     // Heart Questions (5)
@@ -154,12 +157,51 @@ function previousQuestion() {
 
 function submitLead(e) {
     e.preventDefault();
+
+    // Calculate scores before showing results
+    let heartScore = 0;
+    let headScore = 0;
+    questions.forEach((q, idx) => {
+        if (q.category === 'heart') {
+            heartScore += answers[idx];
+        } else {
+            headScore += answers[idx];
+        }
+    });
+    const heartPct = Math.round((heartScore / 25) * 100);
+    const headPct = Math.round((headScore / 25) * 100);
+    const profile = getProfile(heartPct, headPct);
+
+    // Check if user wants a copy
+    const sendCopyCheckbox = document.getElementById('sendCopy');
+    const sendCopy = sendCopyCheckbox ? sendCopyCheckbox.checked : false;
+
     leadData = {
         name: document.getElementById('leadName').value,
         email: document.getElementById('leadEmail').value,
         company: document.getElementById('leadCompany').value,
-        role: document.getElementById('leadRole').value
+        role: document.getElementById('leadRole').value,
+        heartScore: heartPct,
+        headScore: headPct,
+        profileType: profile.type,
+        insights: profile.insights,
+        sendCopy: sendCopy
     };
+
+    // Send data to Google Apps Script
+    if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(leadData)
+        }).catch(error => {
+            console.error('Error submitting lead:', error);
+        });
+    }
+
     showResults();
 }
 
