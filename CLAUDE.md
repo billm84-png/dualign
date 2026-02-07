@@ -7,6 +7,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Dualign** ("Dual + Align") is Bill Maggio's fractional executive advisory practice, with the tagline "Leadership in Balance." The business helps CEOs, founders, and C-suite leaders align emotional intelligence (Heart) with analytical rigor (Head). This static marketing website features the Heart & Head leadership framework and an interactive leadership assessment tool.
 
 **Domain**: dualign.io
+**Repository**: https://github.com/billm84-png/Dualign
+**Hosting**: GitHub Pages (deployed from `main` branch)
 **Contact**: Bill Maggio, bill@dualign.io, (475) 239-4925
 
 ## Technology Stack
@@ -28,7 +30,7 @@ No build tools, package manager, or local server required. Open any HTML file di
 - `about.html` - Bill Maggio bio with headshot, LinkedIn link, stats, and sections: "I've Sat in Your Chair", "Why Dualign", "How I Work", "Now in Your Corner"
 - `services.html` - Six service cards (Strategy, Execution, Fractional Leadership & Operating Rhythms, AI Fluency, Board Services, Executive Coaching & Mentoring)
 - `framework.html` - Heart & Head framework explanation + embedded assessment modal
-- `contact.html` - Contact form with phone and email direct contact options
+- `contact.html` - Contact form (name, email, company, phone, message) with direct contact options; form POSTs to Google Apps Script
 - `privacy.html` - Privacy policy (linked from footer only, not in nav)
 
 ### Branding
@@ -62,6 +64,14 @@ The assessment auto-opens when navigating to `framework.html#assessment`.
 - Optionally emails the user a copy of their results
 
 The Google Apps Script URL is configured as `GOOGLE_SCRIPT_URL` at the top of `assessment.js`. Setup instructions are in `GOOGLE_SHEETS_SETUP.md`.
+
+### Contact Form & Inquiry Capture
+The contact form (`contact.html`) POSTs to the same Google Apps Script endpoint as the assessment. The payload includes `type: 'contact'` so the script routes it to the "Contact Inquiries" sheet tab (separate from assessment leads). On submission:
+- The inquiry is appended to the "Contact Inquiries" Google Sheet tab
+- Bill receives an email notification (with `replyTo` set to the submitter's address)
+- The submitter receives an auto-confirmation email
+
+The `GOOGLE_SCRIPT_URL` is duplicated in an inline `<script>` in `contact.html` (same URL as `assessment.js`). Both assessment and contact emails are sent via `GmailApp.sendEmail()` from bill@dualign.io (configured as a Gmail alias using Porkbun SMTP).
 
 ### Shared Components
 - **Navigation**: All pages share the same nav structure with logo image link to home, nav links (Home, About, Services, Framework, Assessment, Contact), and mobile hamburger menu for screens ≤768px. Privacy policy is deliberately excluded from nav.

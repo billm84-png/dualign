@@ -177,10 +177,12 @@ function submitLead(e) {
     const sendCopy = sendCopyCheckbox ? sendCopyCheckbox.checked : false;
 
     leadData = {
+        type: 'assessment',
         name: document.getElementById('leadName').value,
         email: document.getElementById('leadEmail').value,
         company: document.getElementById('leadCompany').value,
         role: document.getElementById('leadRole').value,
+        phone: document.getElementById('leadPhone').value,
         heartScore: heartPct,
         headScore: headPct,
         profileType: profile.type,

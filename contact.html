@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </div>
-            <form class="contact-form" action="#" method="POST">
+            <form class="contact-form" id="contactForm">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" required>
@@ -66,11 +66,16 @@
                     <input type="text" id="company" name="company">
                 </div>
                 <div class="form-group">
+                    <label for="phone">Phone <span style="font-weight: 400; color: var(--text-light);">(optional)</span></label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
                     <label for="message">How can we help?</label>
                     <textarea id="message" name="message" placeholder="Tell me about your current challenges or what you're looking to accomplish..." required></textarea>
                 </div>
-                <button type="submit" class="submit-button">Send Message</button>
+                <button type="submit" class="submit-button" id="submitBtn">Send Message</button>
             </form>
+            <div id="formStatus"></div>
         </div>
     </section>
 
@@ -91,6 +96,57 @@
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             this.classList.toggle('active');
             document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkmFC0nt4N0U7Bxhb_b_0g128wkbv9rbr5xvo43WINbn-EjFDGMvvA4f9XbfbR2c5RIw/exec';
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var btn = document.getElementById('submitBtn');
+            var status = document.getElementById('formStatus');
+            var originalText = btn.textContent;
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            status.style.display = 'none';
+
+            var contactData = {
+                type: 'contact',
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                company: document.getElementById('company').value,
+                phone: document.getElementById('phone').value,
+                message: document.getElementById('message').value
+            };
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(contactData)
+            }).then(function() {
+                status.textContent = 'Message sent! We\'ll be in touch within one business day.';
+                status.style.display = 'block';
+                status.style.color = '#38a169';
+                status.style.background = '#f0fff4';
+                status.style.border = '1px solid #c6f6d5';
+                status.style.padding = '1rem';
+                status.style.borderRadius = '8px';
+                status.style.marginTop = '1rem';
+                document.getElementById('contactForm').reset();
+            }).catch(function() {
+                status.textContent = 'Something went wrong. Please email bill@dualign.io directly.';
+                status.style.display = 'block';
+                status.style.color = '#e53e3e';
+                status.style.background = '#fff5f5';
+                status.style.border = '1px solid #fed7d7';
+                status.style.padding = '1rem';
+                status.style.borderRadius = '8px';
+                status.style.marginTop = '1rem';
+            }).finally(function() {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            });
         });
     </script>
 </body>
