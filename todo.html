@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do | Dualign</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><img src="logo.png" alt="Dualign - Leadership in Balance"></a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="framework.html">Framework</a></li>
+                <li><a href="framework.html#assessment">Assessment</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>To-Do</h1>
+        <p>Personal task tracker</p>
+    </div>
+
+    <section class="todo-section">
+        <div class="todo-container">
+            <form class="todo-input-row" id="todoForm">
+                <input type="text" id="todoTask" placeholder="What needs to be done?" required>
+                <input type="date" id="todoDue">
+                <button type="submit" class="todo-add-btn" id="todoAddBtn">Add</button>
+            </form>
+            <div id="todoStatus"></div>
+
+            <div id="loadingIndicator" class="todo-loading">Loading tasks...</div>
+
+            <ul class="todo-list" id="todoList"></ul>
+
+            <details class="todo-done-section" id="doneSection" style="display: none;">
+                <summary class="todo-done-toggle">Completed <span id="doneCount"></span></summary>
+                <ul class="todo-list" id="doneList"></ul>
+            </details>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <p class="footer-brand">Dualign <span class="tagline">Leadership in Balance</span></p>
+            <p>&copy; 2026 All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="framework.html">Framework</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script>
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkmFC0nt4N0U7Bxhb_b_0g128wkbv9rbr5xvo43WINbn-EjFDGMvvA4f9XbfbR2c5RIw/exec';
+
+        var tasks = [];
+
+        function loadTasks() {
+            var loading = document.getElementById('loadingIndicator');
+            loading.style.display = 'block';
+
+            fetch(GOOGLE_SCRIPT_URL + '?type=todo')
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    tasks = data.tasks || [];
+                    renderTasks();
+                })
+                .catch(function(err) {
+                    console.error('Error loading tasks:', err);
+                    document.getElementById('todoList').innerHTML =
+                        '<li class="todo-empty">Could not load tasks. Make sure the Apps Script is deployed with doGet().</li>';
+                })
+                .finally(function() {
+                    loading.style.display = 'none';
+                });
+        }
+
+        function renderTasks() {
+            var pendingList = document.getElementById('todoList');
+            var doneList = document.getElementById('doneList');
+            var doneSection = document.getElementById('doneSection');
+            var doneCount = document.getElementById('doneCount');
+
+            var pending = tasks.filter(function(t) { return t.status === 'pending'; });
+            var done = tasks.filter(function(t) { return t.status === 'completed'; });
+
+            // Sort pending by due date (no date goes to end)
+            pending.sort(function(a, b) {
+                if (!a.dueDate && !b.dueDate) return 0;
+                if (!a.dueDate) return 1;
+                if (!b.dueDate) return -1;
+                return a.dueDate.localeCompare(b.dueDate);
+            });
+
+            // Sort done by most recently completed (newest first)
+            done.sort(function(a, b) {
+                return (b.created || '').localeCompare(a.created || '');
+            });
+
+            if (pending.length === 0) {
+                pendingList.innerHTML = '<li class="todo-empty">No tasks yet. Add one above!</li>';
+            } else {
+                pendingList.innerHTML = '';
+                pending.forEach(function(task) {
+                    pendingList.appendChild(createTaskEl(task, false));
+                });
+            }
+
+            if (done.length > 0) {
+                doneSection.style.display = 'block';
+                doneCount.textContent = '(' + done.length + ')';
+                doneList.innerHTML = '';
+                done.forEach(function(task) {
+                    doneList.appendChild(createTaskEl(task, true));
+                });
+            } else {
+                doneSection.style.display = 'none';
+            }
+        }
+
+        function createTaskEl(task, isDone) {
+            var li = document.createElement('li');
+            li.className = 'todo-item' + (isDone ? ' completed' : '');
+
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'todo-checkbox';
+            checkbox.checked = isDone;
+            checkbox.addEventListener('change', function() {
+                toggleTask(task.id, !isDone);
+            });
+
+            var text = document.createElement('span');
+            text.className = 'todo-text';
+            text.textContent = task.task;
+
+            var right = document.createElement('div');
+            right.className = 'todo-item-right';
+
+            if (task.dueDate) {
+                var date = document.createElement('span');
+                date.className = 'todo-date';
+                // Check if overdue (pending only)
+                if (!isDone) {
+                    var today = new Date().toISOString().split('T')[0];
+                    if (task.dueDate < today) {
+                        date.classList.add('overdue');
+                    } else if (task.dueDate === today) {
+                        date.classList.add('today');
+                    }
+                }
+                date.textContent = formatDate(task.dueDate);
+                right.appendChild(date);
+            }
+
+            var deleteBtn = document.createElement('button');
+            deleteBtn.className = 'todo-delete-btn';
+            deleteBtn.innerHTML = '&times;';
+            deleteBtn.title = 'Delete task';
+            deleteBtn.addEventListener('click', function() {
+                deleteTask(task.id);
+            });
+            right.appendChild(deleteBtn);
+
+            li.appendChild(checkbox);
+            li.appendChild(text);
+            li.appendChild(right);
+            return li;
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            var parts = dateStr.split('-');
+            var d = new Date(parts[0], parts[1] - 1, parts[2]);
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+            var tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            if (d.getTime() === today.getTime()) return 'Today';
+            if (d.getTime() === tomorrow.getTime()) return 'Tomorrow';
+
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return months[d.getMonth()] + ' ' + d.getDate();
+        }
+
+        function addTask(taskText, dueDate) {
+            var btn = document.getElementById('todoAddBtn');
+            btn.textContent = 'Adding...';
+            btn.disabled = true;
+
+            var payload = {
+                type: 'todo',
+                action: 'add',
+                task: taskText,
+                dueDate: dueDate || ''
+            };
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(function() {
+                // With no-cors we can't read the response, so add optimistically
+                var newTask = {
+                    id: Date.now().toString(),
+                    task: taskText,
+                    dueDate: dueDate || '',
+                    status: 'pending',
+                    created: new Date().toISOString()
+                };
+                tasks.push(newTask);
+                renderTasks();
+                document.getElementById('todoForm').reset();
+                // Set default date to today for next entry
+                document.getElementById('todoDue').valueAsDate = new Date();
+            }).catch(function(err) {
+                console.error('Error adding task:', err);
+                showStatus('Failed to add task. Try again.', 'error');
+            }).finally(function() {
+                btn.textContent = 'Add';
+                btn.disabled = false;
+            });
+        }
+
+        function toggleTask(taskId, complete) {
+            var payload = {
+                type: 'todo',
+                action: 'complete',
+                id: taskId,
+                status: complete ? 'completed' : 'pending'
+            };
+
+            // Optimistic update
+            tasks = tasks.map(function(t) {
+                if (t.id === taskId) {
+                    t.status = complete ? 'completed' : 'pending';
+                }
+                return t;
+            });
+            renderTasks();
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).catch(function(err) {
+                console.error('Error toggling task:', err);
+            });
+        }
+
+        function deleteTask(taskId) {
+            var payload = {
+                type: 'todo',
+                action: 'delete',
+                id: taskId
+            };
+
+            // Optimistic update
+            tasks = tasks.filter(function(t) { return t.id !== taskId; });
+            renderTasks();
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).catch(function(err) {
+                console.error('Error deleting task:', err);
+            });
+        }
+
+        function showStatus(message, type) {
+            var status = document.getElementById('todoStatus');
+            status.textContent = message;
+            status.style.display = 'block';
+            status.className = 'todo-status ' + type;
+            setTimeout(function() { status.style.display = 'none'; }, 3000);
+        }
+
+        // Form submit
+        document.getElementById('todoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var taskText = document.getElementById('todoTask').value.trim();
+            var dueDate = document.getElementById('todoDue').value;
+            if (taskText) {
+                addTask(taskText, dueDate);
+            }
+        });
+
+        // Default due date to today
+        document.getElementById('todoDue').valueAsDate = new Date();
+
+        // Load tasks on page load
+        loadTasks();
+    </script>
+</body>
+</html>

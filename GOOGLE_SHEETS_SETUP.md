@@ -1,10 +1,11 @@
 # Google Sheets & Apps Script Setup
 
-This guide covers the full backend setup for Dualign's two submission flows:
+This guide covers the full backend setup for Dualign's three flows:
 1. **Assessment leads** — captured from the Heart & Head assessment on framework.html
 2. **Contact inquiries** — captured from the contact form on contact.html
+3. **Personal to-do list** — private task tracker at todo.html
 
-Both flows POST to the same Google Apps Script endpoint, which routes by `type` field.
+All flows use the same Google Apps Script endpoint, which routes by `type` field.
 
 ---
 
@@ -54,7 +55,16 @@ By default, Google Apps Script sends email from your Gmail address (e.g. billm84
 |---|---|---|---|---|---|---|
 | Timestamp | Name | Email | Company | Phone | Message | Confirmation Sent |
 
-8. Note the spreadsheet ID from the URL (the long string between `/d/` and `/edit`):
+### Tasks tab
+8. Click the **+** button to add a new sheet tab
+9. Name it **"Tasks"**
+10. Add these column headers in row 1:
+
+| A | B | C | D | E |
+|---|---|---|---|---|
+| ID | Task | Due Date | Status | Created |
+
+11. Note the spreadsheet ID from the URL (the long string between `/d/` and `/edit`):
    ```
    https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID_HERE/edit
    ```
@@ -73,12 +83,19 @@ const NOTIFICATION_EMAIL = 'bill@dualign.io';
 const FROM_EMAIL = 'bill@dualign.io';
 const ASSESSMENT_SHEET_NAME = 'Assessment Leads';
 const CONTACT_SHEET_NAME = 'Contact Inquiries';
+const TASKS_SHEET_NAME = 'Tasks';
+
+// ============================================================
+// ROUTING — doPost (write operations) & doGet (read operations)
+// ============================================================
 
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
 
-    if (data.type === 'contact') {
+    if (data.type === 'todo') {
+      handleTodoAction(data);
+    } else if (data.type === 'contact') {
       handleContactSubmission(data);
     } else {
       handleAssessmentSubmission(data);
@@ -91,6 +108,25 @@ function doPost(e) {
   } catch (error) {
     return ContentService
       .createTextOutput(JSON.stringify({ success: false, error: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  try {
+    var type = e.parameter.type;
+
+    if (type === 'todo') {
+      return getTasks();
+    }
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ error: 'Unknown type' }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ error: error.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
   }
 }
@@ -240,6 +276,61 @@ function sendContactConfirmation(data) {
 }
 
 // ============================================================
+// TODO HANDLER
+// ============================================================
+
+function handleTodoAction(data) {
+  var sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(TASKS_SHEET_NAME);
+
+  if (data.action === 'add') {
+    var id = Date.now().toString();
+    sheet.appendRow([
+      id,
+      data.task,
+      data.dueDate || '',
+      'pending',
+      new Date().toISOString()
+    ]);
+  } else if (data.action === 'complete') {
+    updateTaskStatus(sheet, data.id, data.status || 'completed');
+  } else if (data.action === 'delete') {
+    updateTaskStatus(sheet, data.id, 'deleted');
+  }
+}
+
+function getTasks() {
+  var sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(TASKS_SHEET_NAME);
+  var data = sheet.getDataRange().getValues();
+  var tasks = [];
+
+  // Skip header row
+  for (var i = 1; i < data.length; i++) {
+    if (data[i][3] === 'deleted') continue; // Skip deleted tasks
+    tasks.push({
+      id: data[i][0].toString(),
+      task: data[i][1],
+      dueDate: data[i][2] ? Utilities.formatDate(new Date(data[i][2]), Session.getScriptTimeZone(), 'yyyy-MM-dd') : '',
+      status: data[i][3] || 'pending',
+      created: data[i][4]
+    });
+  }
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ tasks: tasks }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function updateTaskStatus(sheet, taskId, newStatus) {
+  var data = sheet.getDataRange().getValues();
+  for (var i = 1; i < data.length; i++) {
+    if (data[i][0].toString() === taskId.toString()) {
+      sheet.getRange(i + 1, 4).setValue(newStatus); // Column D = Status
+      break;
+    }
+  }
+}
+
+// ============================================================
 // TEST FUNCTIONS
 // ============================================================
 
@@ -296,7 +387,7 @@ This script uses `GmailApp.sendEmail()` instead of `MailApp.sendEmail()`. The ke
    https://script.google.com/macros/s/XXXXXXXXXXXXXXX/exec
    ```
 
-**Save this URL!** It's already configured in `assessment.js` and `contact.html`.
+**Save this URL!** It's already configured in `assessment.js`, `contact.html`, and `todo.html`.
 
 ### Updating an existing deployment
 
@@ -305,7 +396,7 @@ If you already have a deployment and are updating the script:
 2. Click the **pencil icon**
 3. Under "Version", select **New version**
 4. Click **Deploy**
-5. Re-authorize if prompted (required when switching from MailApp to GmailApp)
+5. Re-authorize if prompted (required when adding new functions like doGet)
 
 ---
 
@@ -320,6 +411,12 @@ If you already have a deployment and are updating the script:
 1. Select `testContactNotification` from the function dropdown
 2. Click **Run**
 3. Check your email — you should receive a contact notification from bill@dualign.io
+
+### Test to-do flow
+1. Navigate to `dualign.io/todo.html`
+2. Add a task with a due date — it should appear in the list and in the "Tasks" sheet tab
+3. Check a task complete — status updates to "completed" in the sheet, task moves to "Completed" section
+4. Delete a task — removed from view, marked "deleted" in the sheet
 
 ### End-to-end testing
 1. Open the website and complete the assessment — verify the lead appears in the "Assessment Leads" tab
@@ -344,7 +441,7 @@ If you already have a deployment and are updating the script:
 
 **Data not appearing in sheet**
 - Verify the `SPREADSHEET_ID` matches your sheet
-- Verify tab names match: "Assessment Leads" and "Contact Inquiries"
+- Verify tab names match: "Assessment Leads", "Contact Inquiries", and "Tasks"
 
 **Contact form submissions going to assessment sheet (or vice versa)**
 - Make sure the website code includes `type: 'contact'` (contact.html) or `type: 'assessment'` (assessment.js) in the POST payload
@@ -352,3 +449,7 @@ If you already have a deployment and are updating the script:
 
 **"Gmail alias not found" error**
 - Complete the Prerequisites section — the alias must be verified in Gmail before GmailApp can use it
+
+**To-do page shows "Could not load tasks"**
+- Make sure `doGet()` is in the script and you deployed a new version after adding it
+- Verify the "Tasks" tab exists in the spreadsheet with the exact name "Tasks"

@@ -32,6 +32,7 @@ No build tools, package manager, or local server required. Open any HTML file di
 - `framework.html` - Heart & Head framework explanation + embedded assessment modal
 - `contact.html` - Contact form (name, email, company, phone, message) with direct contact options; form POSTs to Google Apps Script
 - `privacy.html` - Privacy policy (linked from footer only, not in nav)
+- `todo.html` - Personal to-do list (private, not linked from nav or footer; accessible at dualign.io/todo.html). Tasks are stored in a "Tasks" tab in the Google Sheet via Apps Script `doGet()`/`doPost()` handlers. Supports add, complete, and delete actions with optimistic UI updates.
 
 ### Branding
 - **Company name**: Dualign (Dual + Align)
