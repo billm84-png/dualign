@@ -141,6 +141,15 @@ nav {
     align-items: center;
 }
 
+.hero-content .hero-eyebrow {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
 .hero-content h1 {
     font-size: 3.5rem;
     font-weight: 700;
@@ -374,7 +383,7 @@ section {
 }
 
 .stat-number {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--primary);
 }
@@ -416,6 +425,23 @@ section {
 /* Services Section */
 .services {
     background: var(--bg-light);
+}
+
+.services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.who-i-work-with {
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.who-i-work-with p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--text-medium);
 }
 
 .services-grid {
@@ -2262,6 +2288,79 @@ footer p {
     color: var(--text-medium);
 }
 
+/* Testimonials Section */
+.testimonials {
+    background: var(--bg-white);
+}
+
+.testimonials-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.testimonials-container h2 {
+    text-align: center;
+    font-size: 2.25rem;
+    color: var(--primary);
+    margin-bottom: 3rem;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background: var(--bg-light);
+    padding: 2.5rem 2rem 2rem;
+    border-radius: 16px;
+    position: relative;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+.quote-mark {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    opacity: 0.3;
+}
+
+.testimonial-card blockquote {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-dark);
+    font-style: italic;
+    margin: 0 0 1.5rem;
+}
+
+.testimonial-attribution {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.attribution-name {
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+.attribution-detail {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .logo img {
@@ -2369,7 +2468,13 @@ footer p {
 
     .about-stats {
         flex-direction: row;
+        flex-wrap: wrap;
         justify-content: center;
+    }
+
+    .about-stats .stat {
+        flex: 1 1 calc(50% - 1rem);
+        min-width: 140px;
     }
 
     .framework-pillars {
@@ -2405,6 +2510,15 @@ footer p {
     .footer-links {
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    /* Testimonials responsive */
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonials-container h2 {
+        font-size: 1.85rem;
     }
 
     /* Refined hero responsive */
