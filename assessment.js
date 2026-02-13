@@ -1,59 +1,69 @@
 // Google Apps Script Web App URL
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkmFC0nt4N0U7Bxhb_b_0g128wkbv9rbr5xvo43WINbn-EjFDGMvvA4f9XbfbR2c5RIw/exec';
 
-// Assessment Questions
+// Assessment Questions — Executive Alignment Risk Scan
 const questions = [
-    // Heart Questions (5)
+    // Heart Questions (5) — Risk Management
     {
         category: 'heart',
-        text: 'Our leadership team actively invests time in developing and mentoring team members.',
-        icon: '&#9829;'
-    },
-    {
-        category: 'heart',
-        text: 'People feel psychologically safe to voice concerns and share ideas without fear of judgment.',
-        icon: '&#9829;'
+        text: 'Critical operational failures are reported to the CEO/board immediately, without being polished or softened by middle management.',
+        icon: '&#9829;',
+        riskLabel: 'Bad News Velocity — Iceberg Risk'
     },
     {
         category: 'heart',
-        text: 'Leaders in our organization demonstrate empathy and emotional intelligence in difficult situations.',
-        icon: '&#9829;'
+        text: 'Our high-potential performers clearly understand how their daily work impacts the company\'s valuation or exit strategy.',
+        icon: '&#9829;',
+        riskLabel: 'Talent/Strategy Bridge — Retention Risk'
     },
     {
         category: 'heart',
-        text: 'We prioritize building trust and authentic relationships across all levels of the organization.',
-        icon: '&#9829;'
+        text: 'When a project fails, the focus is entirely on process improvement, not finger-pointing or blame.',
+        icon: '&#9829;',
+        riskLabel: 'Post-Mortem Culture — Cultural Fracture'
     },
     {
         category: 'heart',
-        text: 'Change initiatives are communicated with consideration for how they impact people emotionally.',
-        icon: '&#9829;'
-    },
-    // Head Questions (5)
-    {
-        category: 'head',
-        text: 'Our strategic decisions are consistently informed by data and rigorous analysis.',
-        icon: '&#9881;'
+        text: 'Disagreements between C-suite peers are resolved directly and professionally within 48 hours, without requiring CEO intervention.',
+        icon: '&#9829;',
+        riskLabel: 'Conflict Resolution — Leadership Friction'
     },
     {
-        category: 'head',
-        text: 'We have clear metrics and KPIs that everyone understands and can act upon.',
-        icon: '&#9881;'
+        category: 'heart',
+        text: 'Our leadership team actively develops successors and builds bench strength for critical roles.',
+        icon: '&#9829;',
+        riskLabel: 'Succession Depth — Continuity Risk'
     },
+    // Head Questions (5) — Decision Discipline
     {
         category: 'head',
-        text: 'Our leadership team has established regular operating rhythms (meetings, reviews, planning cycles).',
-        icon: '&#9881;'
+        text: 'Every member of the C-suite would list the same top three strategic priorities for this quarter.',
+        icon: '&#9881;',
+        riskLabel: 'Strategic Alignment — Resource Waste'
     },
     {
         category: 'head',
-        text: 'We systematically evaluate and optimize our processes for efficiency and effectiveness.',
-        icon: '&#9881;'
+        text: 'There is zero ambiguity about who has final decision authority on cross-functional initiatives like AI adoption or pricing changes.',
+        icon: '&#9881;',
+        riskLabel: 'Decision Rights — Decision Paralysis'
     },
     {
         category: 'head',
-        text: 'Strategy is clearly articulated and cascaded into actionable plans with accountability.',
-        icon: '&#9881;'
+        text: 'We have a formal, board-vetted policy for how employees use generative AI with proprietary company data.',
+        icon: '&#9881;',
+        riskLabel: 'AI Governance — Legal/IP Liability'
+    },
+    {
+        category: 'head',
+        text: 'Our executive meetings are 80% future-facing strategic discussion and 20% status updates.',
+        icon: '&#9881;',
+        riskLabel: 'Meeting ROI — Operational Drift'
+    },
+    {
+        category: 'head',
+        text: 'Our current operating systems could handle a 2x increase in volume or headcount without the CEO working 80-hour weeks.',
+        icon: '&#9881;',
+        riskLabel: 'Scale Readiness — Founder Bottleneck'
     }
 ];
 
@@ -108,6 +118,9 @@ function renderQuestion() {
     document.getElementById('categoryText').textContent = q.category.charAt(0).toUpperCase() + q.category.slice(1);
 
     document.getElementById('questionText').textContent = q.text;
+
+    // Update category label with risk context
+    document.getElementById('categoryLabel').textContent = q.riskLabel || '';
 
     // Render rating scale
     const scaleEl = document.getElementById('ratingScale');
@@ -170,7 +183,8 @@ function submitLead(e) {
     });
     const heartPct = Math.round((heartScore / 25) * 100);
     const headPct = Math.round((headScore / 25) * 100);
-    const profile = getProfile(heartPct, headPct);
+    const totalScore = heartScore + headScore;
+    const profile = getProfile(heartPct, headPct, totalScore);
 
     // Check if user wants a copy
     const sendCopyCheckbox = document.getElementById('sendCopy');
@@ -185,6 +199,7 @@ function submitLead(e) {
         phone: document.getElementById('leadPhone').value,
         heartScore: heartPct,
         headScore: headPct,
+        totalScore: totalScore,
         profileType: profile.type,
         insights: profile.insights,
         sendCopy: sendCopy
@@ -225,10 +240,11 @@ function showResults() {
     // Convert to percentage (max 25 per category)
     const heartPct = Math.round((heartScore / 25) * 100);
     const headPct = Math.round((headScore / 25) * 100);
+    const totalScore = heartScore + headScore;
 
     // Update greeting
     const firstName = leadData.name.split(' ')[0];
-    document.getElementById('resultsGreeting').textContent = `${firstName}, here's how your organization balances Heart and Head`;
+    document.getElementById('resultsGreeting').textContent = `${firstName}, here's your executive alignment profile`;
 
     // Update score displays
     document.getElementById('heartScoreDisplay').textContent = heartPct + '%';
@@ -242,31 +258,58 @@ function showResults() {
     dot.style.top = yPos + '%';
 
     // Determine profile and insights
-    const profile = getProfile(heartPct, headPct);
+    const profile = getProfile(heartPct, headPct, totalScore);
     document.getElementById('profileType').textContent = profile.type;
     document.getElementById('insightsText').textContent = profile.insights;
 }
 
-function getProfile(heart, head) {
-    if (heart >= 60 && head >= 60) {
-        return {
-            type: 'Balanced Leader',
-            insights: `Your organization demonstrates strength in both people-centered leadership and analytical rigor. This balance positions you well for sustainable transformation. Consider how you can leverage this foundation to drive innovation and navigate complex challenges. The opportunity lies in maintaining this balance during periods of rapid growth or change.`
-        };
-    } else if (heart >= 60 && head < 60) {
-        return {
-            type: 'Heart-Forward Leader',
-            insights: `Your organization excels at building trust, developing people, and creating psychological safety. These are critical foundations for high-performance. To accelerate results, consider strengthening your operating rhythms, data-driven decision making, and strategic clarity. The combination of your people strength with enhanced analytical discipline can be transformational.`
-        };
-    } else if (heart < 60 && head >= 60) {
-        return {
-            type: 'Head-Forward Leader',
-            insights: `Your organization shows strong analytical capabilities and systematic approaches to execution. This provides a solid operational foundation. To unlock greater engagement and innovation, consider investing in psychological safety, leadership development, and authentic connection. Teams with both analytical strength and high trust dramatically outperform those with only one.`
-        };
+function getProfile(heart, head, totalScore) {
+    // Zone-based scoring: total score out of 50 (10 questions x max 5)
+    // High-Performance Zone: 40-50 (80-100%)
+    // Friction Zone: 25-39 (50-79%)
+    // Fracture Zone: Under 25 (<50%)
+
+    if (totalScore >= 40) {
+        // High-Performance Zone — but check for imbalance
+        if (heart >= 60 && head >= 60) {
+            return {
+                type: 'High-Performance Zone',
+                insights: `Disciplined alignment across both dimensions. Your organization shows strong execution transparency and decision discipline. Your risk is complacency — this balance is hard-won and easy to lose during rapid growth, leadership transitions, or market disruption. Protect what you've built by stress-testing your systems against a 2x scale scenario.`
+            };
+        } else if (heart >= 60) {
+            return {
+                type: 'High-Performance Zone — Heart-Heavy',
+                insights: `Strong cultural foundation, but your decision systems may not scale. You're likely making good decisions slowly. Focus on clarifying decision rights, formalizing AI governance, and ensuring your operating cadence matches your growth ambitions. The gap between your people strength and your systems maturity is a hidden friction tax.`
+            };
+        } else {
+            return {
+                type: 'High-Performance Zone — Head-Heavy',
+                insights: `Strong systems and decision discipline, but your execution transparency scores suggest bad news may be traveling too slowly. High-performing teams with weak psychological safety eventually lose their best people — or worse, lose visibility into operational risks until it's too late. Invest in conflict resolution speed and succession depth.`
+            };
+        }
+    } else if (totalScore >= 25) {
+        // Friction Zone
+        if (heart >= 60 && head < 60) {
+            return {
+                type: 'Friction Zone — Culture Strong, Systems Weak',
+                insights: `Your team trusts each other, but you're successful despite your operating systems, not because of them. You're paying a friction tax on every cross-functional decision: unclear decision rights, meetings that rehash instead of resolve, and strategic priorities that shift quarterly. This is the classic pattern before a missed quarter surprises the board.`
+            };
+        } else if (heart < 60 && head >= 60) {
+            return {
+                type: 'Friction Zone — Systems Strong, Culture Fragile',
+                insights: `Your operating rhythms and accountability structures are solid, but leadership friction is creating drag. When C-suite conflicts require CEO mediation, when bad news gets polished before it reaches you, and when your best people can't connect their work to the company's future — you have a retention and execution transparency problem that metrics alone won't solve.`
+            };
+        } else {
+            return {
+                type: 'Friction Zone',
+                insights: `You're succeeding despite your leadership alignment, not because of it. Every misaligned decision, every unresolved C-suite conflict, and every ambiguous authority line is a tax on your EBITDA. The good news: focused alignment work on decision rights, operating cadence, and execution transparency typically shows measurable improvement within 90 days.`
+            };
+        }
     } else {
+        // Fracture Zone
         return {
-            type: 'Emerging Leader',
-            insights: `Your organization has significant opportunities to strengthen both dimensions of effective leadership. This is common during periods of rapid growth, transition, or when scaling beyond founder-led operations. Focused investment in leadership capability, operating rhythms, and culture can drive meaningful improvement. Consider which dimension to prioritize first based on your most pressing challenges.`
+            type: 'Fracture Zone',
+            insights: `High risk of cultural fracture or operational breakdown during the next scale-up, acquisition, or market shift. Your scores suggest significant gaps in both execution transparency and decision discipline. This is common during rapid growth, post-acquisition integration, or founder-to-professional-management transitions. The priority is stabilization: clarify the top three strategic priorities, establish decision rights, and create a safe channel for bad news to travel fast.`
         };
     }
 }

@@ -406,6 +406,39 @@ section {
     font-size: 1.05rem;
 }
 
+/* Proven Theses Section */
+.proven-theses {
+    margin: 2.5rem 0;
+}
+
+.proven-theses h3 {
+    font-size: 1.75rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.thesis-card {
+    background: var(--bg-light);
+    border-left: 4px solid var(--primary);
+    padding: 1.5rem 1.75rem;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 1.25rem;
+}
+
+.thesis-card h4 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.thesis-card p {
+    font-size: 0.95rem;
+    color: var(--text-medium);
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
 .credentials {
     display: flex;
     flex-wrap: wrap;
@@ -2307,7 +2340,7 @@ footer p {
 
 .testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
 }
 
