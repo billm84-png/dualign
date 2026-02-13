@@ -26,7 +26,7 @@ No build tools, package manager, or local server required. Open any HTML file di
 
 ### Key Patterns to Know
 
-**Nav and footer are duplicated across all HTML files.** There is no templating. When changing navigation links, footer content, or the mobile menu script, you must update every HTML file. The nav includes: Home, About, Services, Framework, Assessment, Contact. Privacy is footer-only, not in nav. `todo.html` is deliberately hidden from both nav and footer.
+**Nav and footer are duplicated across all HTML files.** There is no templating. When changing navigation links, footer content, or the mobile menu script, you must update every HTML file. The nav includes: Home, About, Services, Framework, Assessment, Contact. Privacy is footer-only, not in nav. `todo.html` is deliberately hidden from both nav and footer. Each page marks its own nav link with `class="active"` — maintain this when editing nav markup.
 
 **`GOOGLE_SCRIPT_URL` is defined in three places** — it must stay in sync:
 - `assessment.js` (line 2, top-level const)
