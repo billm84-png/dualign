@@ -12,7 +12,7 @@ const questions = [
     },
     {
         category: 'heart',
-        text: 'Our high-potential performers clearly understand how their daily work impacts the company\'s valuation or exit strategy.',
+        text: 'Our high-potential performers clearly understand how their daily work impacts the company\'s profitability, valuation and/or exit strategy.',
         icon: '&#9829;',
         riskLabel: 'Talent/Strategy Bridge — Retention Risk'
     },
