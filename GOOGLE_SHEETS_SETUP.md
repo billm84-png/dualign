@@ -266,7 +266,7 @@ function sendContactConfirmation(data) {
     'Best regards,\n' +
     'Bill Maggio\n' +
     'bill@dualign.io\n' +
-    '(475) 239-4925\n' +
+    '(475) 284-5315\n' +
     'Dualign | Leadership in Balance';
 
   GmailApp.sendEmail(data.email, subject, body, {

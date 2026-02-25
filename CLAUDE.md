@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Domain**: dualign.io
 **Repository**: https://github.com/billm84-png/Dualign
 **Hosting**: GitHub Pages (deployed from `main` branch)
-**Contact**: Bill Maggio, bill@dualign.io, (475) 239-4925
+**Contact**: Bill Maggio, bill@dualign.io, (475) 284-5315
 
 ## Development
 
