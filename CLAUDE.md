@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Dualign** ("Dual + Align") is Bill Maggio's fractional executive advisory practice, with the tagline "Leadership in Balance." The business helps CEOs, founders, and C-suite leaders align emotional intelligence (Heart) with analytical rigor (Head). This static marketing website features the Heart & Head leadership framework and an interactive Executive Alignment Risk Scan.
+**Dualign** ("Dual + Align") is Bill Maggio's fractional executive advisory practice, with the tagline "Leadership in Balance." The business helps CEOs, founders, owners, and C-suite leaders align emotional intelligence (Heart) with analytical rigor (Head). This static marketing website features the Heart & Head leadership framework and an interactive Executive Alignment Risk Scan.
 
 **Domain**: dualign.io
 **Repository**: https://github.com/billm84-png/Dualign
@@ -19,10 +19,12 @@ No build tools, package manager, or local server required. Open any HTML file di
 
 ### File Layout
 
-- 7 HTML pages (index, about, services, framework, contact, privacy, todo)
+- 7 HTML pages: `index.html`, `about.html`, `services.html`, `framework.html`, `contact.html`, `privacy.html`, `todo.html`
 - `styles.css` — single stylesheet, CSS custom properties in `:root` for theming
 - `assessment.js` — interactive Executive Alignment Risk Scan (modal in `framework.html`)
 - `logo.png`, `headshot.jpg` — static assets
+- `GOOGLE_SHEETS_SETUP.md` — full backend setup guide (Google Apps Script, Gmail alias, sheet structure)
+- `Executive-Alignment-Risk-Scan-Analysis-Logic.docx` — reference document covering scoring rubric, zone classification, decision tree, and all 7 profile variant insight texts
 
 ### Key Patterns to Know
 
@@ -32,12 +34,25 @@ No build tools, package manager, or local server required. Open any HTML file di
 
 **`GOOGLE_SCRIPT_URL` is defined in three places** — it must stay in sync:
 - `assessment.js` (line 2, top-level const)
-- `contact.html` (inline `<script>`, used for the contact form)
-- `todo.html` (inline `<script>`, used for the to-do list)
+- `contact.html` (inline `<script>`, line 101)
+- `todo.html` (inline `<script>`, line 76)
 
 All three POST to the same Google Apps Script endpoint. The script routes by `type` field: `'contact'` → Contact Inquiries sheet, `'todo'` → Tasks sheet, `'assessment'` → Assessment Leads sheet.
 
 **Mobile menu toggle** is an inline `<script>` at the bottom of every HTML page (identical 3-line snippet toggling `.active` on `.mobile-menu-btn` and `.nav-links`).
+
+### Services Page Structure (services.html)
+
+Six service cards, each following a consistent pattern: description of the engagement → bold **Outcome:** statement. All six cards must have an Outcome. The current card names are:
+
+1. **Inflection-Point Strategy & 90-Day Operating Plan**
+2. **Operating Rhythm & Execution Discipline**
+3. **Fractional COO/CTO — Embedded Operating Leadership**
+4. **AI Governance & Operationalization**
+5. **Board & National Security Governance**
+6. **CEO/Founder Advisory — The Shadow COO**
+
+When editing service cards, preserve the `<strong>Outcome:</strong>` pattern and keep the description-then-outcome structure.
 
 ### Assessment Flow (assessment.js + framework.html)
 
@@ -48,7 +63,19 @@ Multi-step modal: Intro → 10 rating questions (5 Heart, 5 Head) → Lead captu
 - **Friction Zone** (total 25–39): culture-strong/systems-weak, systems-strong/culture-fragile, or general
 - **Fracture Zone** (total < 25): single variant
 
-Within zones, heart/head percentage thresholds (≥60% or <60%) determine the specific variant.
+Within zones, heart/head percentage thresholds (≥60% or <60%) determine the specific variant. There are 7 total profile variants, each with a unique insight narrative. Full scoring logic is documented in `Executive-Alignment-Risk-Scan-Analysis-Logic.docx`.
+
+### Homepage Structure (index.html)
+
+The homepage has four main content sections:
+- **Hero**: Tagline, CTA buttons, framework visual link
+- **Credibility bar**: $450M+, 30+ years, 36 countries
+- **"Sound Familiar?"**: Six pain-point cards that mirror the six services (matching icons). These should stay conceptually aligned with the services page.
+- **"What People Say"**: Four testimonial cards (anonymous, role-based attribution)
+
+### About Page Structure (about.html)
+
+Sidebar with headshot, LinkedIn link, and four stat cards. Main content includes narrative bio, four "Proven Theses" cards, "Why Dualign" and "How We Work" sections, and credential tags at the bottom. The credential tags should stay aligned with the service offerings.
 
 ### Backend (Google Apps Script)
 
