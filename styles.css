@@ -700,6 +700,52 @@ section {
     height: 20px;
 }
 
+.booking-card {
+    text-align: center;
+    background: var(--bg-light);
+    border: 2px solid var(--primary);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    margin-bottom: 2rem;
+}
+
+.booking-card h3 {
+    font-size: 1.35rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.booking-card p {
+    color: var(--text-medium);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-divider {
+    text-align: center;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.contact-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border);
+}
+
+.contact-divider span {
+    position: relative;
+    background: var(--bg-white);
+    padding: 0 1rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    text-transform: lowercase;
+}
+
 .contact-form {
     display: flex;
     flex-direction: column;
