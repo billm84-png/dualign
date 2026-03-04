@@ -23,6 +23,7 @@ No build tools, package manager, or local server required. Open any HTML file di
 - `styles.css` — single stylesheet, CSS custom properties in `:root` for theming
 - `assessment.js` — interactive Executive Alignment Risk Scan (modal in `framework.html`)
 - `logo.png`, `headshot.jpg` — static assets
+- `CNAME` — GitHub Pages custom domain (`dualign.io`)
 - `GOOGLE_SHEETS_SETUP.md` — full backend setup guide (Google Apps Script, Gmail alias, sheet structure)
 - `Executive-Alignment-Risk-Scan-Analysis-Logic.docx` — reference document covering scoring rubric, zone classification, decision tree, and all 7 profile variant insight texts
 
@@ -34,7 +35,7 @@ No build tools, package manager, or local server required. Open any HTML file di
 
 **`GOOGLE_SCRIPT_URL` is defined in three places** — it must stay in sync:
 - `assessment.js` (line 2, top-level const)
-- `contact.html` (inline `<script>`, line 101)
+- `contact.html` (inline `<script>`, line 109)
 - `todo.html` (inline `<script>`, line 76)
 
 All three POST to the same Google Apps Script endpoint. The script routes by `type` field: `'contact'` → Contact Inquiries sheet, `'todo'` → Tasks sheet, `'assessment'` → Assessment Leads sheet.
@@ -49,7 +50,7 @@ Six service cards, each following a consistent pattern: description of the engag
 2. **Operating Rhythm & Execution Discipline**
 3. **Fractional COO/CTO — Embedded Operating Leadership**
 4. **AI Governance & Operationalization**
-5. **Board & National Security Governance**
+5. **Board & US National Security Governance**
 6. **CEO/Founder Advisory — The Shadow COO**
 
 When editing service cards, preserve the `<strong>Outcome:</strong>` pattern and keep the description-then-outcome structure.
@@ -76,6 +77,14 @@ The homepage has four main content sections:
 ### About Page Structure (about.html)
 
 Sidebar with headshot, LinkedIn link, and four stat cards. Main content includes narrative bio, four "Proven Theses" cards, "Why Dualign" and "How We Work" sections, and credential tags at the bottom. The credential tags should stay aligned with the service offerings.
+
+### Contact Page Structure (contact.html)
+
+Three contact options in order: direct contact methods (phone/email), a "Book a Meeting" card linking to Microsoft Bookings (Outlook), and a contact form. The booking card links to an external Outlook `bookwithme` URL. The form POSTs to the Google Apps Script with `type: 'contact'`.
+
+### Assessment CTA Sections
+
+Both `services.html` and `about.html` end with an `.assessment-cta` section linking to `framework.html#assessment`. When editing these CTAs, keep them consistent across pages.
 
 ### Backend (Google Apps Script)
 
