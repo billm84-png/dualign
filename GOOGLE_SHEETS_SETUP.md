@@ -42,9 +42,9 @@ By default, Google Apps Script sends email from your Gmail address (e.g. billm84
 3. Rename the default "Sheet1" tab to **"Assessment Leads"** (right-click the tab → Rename)
 4. Add these column headers in row 1:
 
-| A | B | C | D | E | F | G | H | I | J |
-|---|---|---|---|---|---|---|---|---|---|
-| Timestamp | Name | Email | Company | Role | Phone | Heart Score | Head Score | Profile Type | Email Sent |
+| A | B | C | D | E | F | G | H | I | J | K |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Timestamp | Name | Email | Company | Role | Phone | Heart Score | Head Score | Profile Type | Email Sent | PDF Downloaded |
 
 ### Contact Inquiries tab
 5. Click the **+** button to add a new sheet tab
@@ -97,8 +97,8 @@ function doPost(e) {
       handleTodoAction(data);
     } else if (data.type === 'contact') {
       handleContactSubmission(data);
-    } else if (data.type === 'assessment-download') {
-      handleAssessmentDownload(data);
+    } else if (data.type === 'assessment-download-flag') {
+      handleAssessmentDownloadFlag(data);
     } else {
       handleAssessmentSubmission(data);
     }
@@ -150,7 +150,8 @@ function handleAssessmentSubmission(data) {
     data.heartScore + '%',
     data.headScore + '%',
     data.profileType,
-    data.sendCopy ? 'Requested' : 'No'
+    data.sendCopy ? 'Requested' : 'No',
+    'No'
   ]);
 
   sendAssessmentNotification(data);
@@ -245,34 +246,20 @@ function sendAssessmentResultsToUser(data) {
 }
 
 // ============================================================
-// ASSESSMENT PDF DOWNLOAD HANDLER
+// ASSESSMENT PDF DOWNLOAD FLAG HANDLER
 // ============================================================
 
-function handleAssessmentDownload(data) {
-  var subject = 'Assessment PDF Downloaded: ' + data.name;
+function handleAssessmentDownloadFlag(data) {
+  var sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(ASSESSMENT_SHEET_NAME);
+  var rows = sheet.getDataRange().getValues();
 
-  var body = 'Assessment Results PDF Downloaded\n\n' +
-    'Name: ' + data.name + '\n' +
-    'Email: ' + data.email + '\n' +
-    'Company: ' + (data.company || 'Not provided') + '\n' +
-    'Role: ' + (data.role || 'Not provided') + '\n\n' +
-    'RESULTS\n' +
-    '-------\n' +
-    'Heart Score: ' + data.heartScore + '%\n' +
-    'Head Score: ' + data.headScore + '%\n' +
-    'Profile Type: ' + data.profileType + '\n\n' +
-    'INSIGHTS\n' +
-    '--------\n' +
-    data.insights + '\n\n' +
-    formatResponses(data.responses) +
-    '---\n' +
-    'This person downloaded their assessment results as a PDF.\n' +
-    'View all leads: https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID;
-
-  GmailApp.sendEmail(NOTIFICATION_EMAIL, subject, body, {
-    from: FROM_EMAIL,
-    replyTo: data.email
-  });
+  // Find the row by email (column C, index 2) — update most recent match
+  for (var i = rows.length - 1; i >= 1; i--) {
+    if (rows[i][2] === data.email) {
+      sheet.getRange(i + 1, 11).setValue('Yes'); // Column K = PDF Downloaded
+      break;
+    }
+  }
 }
 
 // ============================================================

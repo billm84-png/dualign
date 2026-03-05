@@ -292,23 +292,16 @@ function downloadResultsPDF() {
     var profile = getProfile(heartPct, headPct, totalScore);
     var firstName = leadData.name ? leadData.name.split(' ')[0] : '';
 
-    // Notify Bill of download
+    // Flag PDF download in Google Sheet (no separate email — Bill gets full results on submit)
     if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
         fetch(GOOGLE_SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                type: 'assessment-download',
-                name: leadData.name || '',
+                type: 'assessment-download-flag',
                 email: leadData.email || '',
-                company: leadData.company || '',
-                role: leadData.role || '',
-                heartScore: heartPct,
-                headScore: headPct,
-                profileType: profile.type,
-                insights: profile.insights,
-                responses: leadData.responses || []
+                name: leadData.name || ''
             })
         }).catch(function() {});
     }
