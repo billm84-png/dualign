@@ -2446,6 +2446,117 @@ footer p {
     line-height: 1.7;
 }
 
+/* LinkedIn Insights Section */
+.linkedin-insights {
+    padding: 6rem 2rem;
+    background: var(--bg-light);
+}
+
+.linkedin-insights-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.linkedin-insights-container h2 {
+    text-align: center;
+    font-size: 2.25rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.linkedin-subtitle {
+    text-align: center;
+    color: var(--text-medium);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+}
+
+.linkedin-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.linkedin-card {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 1.75rem;
+    text-decoration: none;
+    color: var(--text-dark);
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.linkedin-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(26, 54, 93, 0.12);
+}
+
+.linkedin-topic {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+}
+
+.linkedin-card h3 {
+    font-size: 1.15rem;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    line-height: 1.35;
+}
+
+.linkedin-card p {
+    font-size: 0.95rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+    flex: 1;
+}
+
+.linkedin-read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.linkedin-card:hover .linkedin-read-more {
+    color: var(--primary);
+}
+
+.linkedin-follow {
+    text-align: center;
+}
+
+.linkedin-follow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-medium);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+}
+
+.linkedin-follow-link:hover {
+    color: #0077b5;
+    background: rgba(0, 119, 181, 0.08);
+}
+
+.linkedin-follow-link svg {
+    color: #0077b5;
+}
+
 /* Final CTA Section */
 .final-cta {
     padding: 6rem 2rem;
@@ -3162,6 +3273,15 @@ footer p {
     }
 
     .testimonials-container h2 {
+        font-size: 1.85rem;
+    }
+
+    /* LinkedIn Insights responsive */
+    .linkedin-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .linkedin-insights-container h2 {
         font-size: 1.85rem;
     }
 
