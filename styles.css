@@ -168,8 +168,16 @@ nav {
 .hero-content .tagline {
     font-size: 1.1rem;
     color: var(--text-light);
-    margin-bottom: 2rem;
+    margin-bottom: 0.75rem;
     max-width: 500px;
+}
+
+.hero-triggers {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    opacity: 0.75;
+    letter-spacing: 0.5px;
+    margin-bottom: 2rem;
 }
 
 .hero-buttons {
@@ -505,6 +513,29 @@ section {
 .service-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+.service-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    background: rgba(26, 54, 93, 0.08);
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.service-tag.tag-embed {
+    background: rgba(49, 151, 149, 0.1);
+    color: #319795;
+}
+
+.service-tag.tag-board {
+    background: rgba(214, 158, 46, 0.12);
+    color: #b7791f;
 }
 
 .service-icon {
