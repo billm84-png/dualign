@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heart & Head Framework | Dualign</title>
+    <meta name="description" content="The Heart & Head leadership framework balances emotional intelligence with analytical rigor. Take the Executive Alignment Risk Scan to identify where leadership friction is costing you money.">
+    <meta property="og:title" content="Heart & Head Framework | Dualign">
+    <meta property="og:description" content="Balanced leadership isn't philosophy. It's risk management. Take the Executive Alignment Risk Scan.">
+    <meta property="og:image" content="https://dualign.io/logo.png">
+    <meta property="og:url" content="https://dualign.io/framework.html">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://dualign.io/framework.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -37,12 +47,12 @@
     <section class="framework-section">
         <div class="framework-container">
             <p class="subtitle">The most effective leaders combine emotional intelligence with analytical rigor. This framework guides how we approach every engagement.</p>
-            <p class="subtitle" style="margin-top: 1rem; font-style: italic;">Head without Heart creates rigidity. Heart without Head creates drift.</p>
+            <p class="subtitle subtitle--italic">Head without Heart creates rigidity. Heart without Head creates drift.</p>
             <div class="framework-pillars">
                 <div class="pillar">
                     <h3><span class="pillar-icon">&#9829;</span> Heart &mdash; Risk Management</h3>
                     <p>Trust is the operating system beneath every high-performing team. When your people feel safe to speak candidly, problems surface early, talent stays engaged, and change strengthens culture rather than fractures it.</p>
-                    <ul style="margin-top: 1rem; opacity: 0.9; font-size: 0.9rem; padding-left: 1.25rem;">
+                    <ul>
                         <li>Execution Transparency</li>
                         <li>Trust & Decision Velocity</li>
                         <li>Talent Retention & Velocity</li>
@@ -53,7 +63,7 @@
                 <div class="pillar">
                     <h3><span class="pillar-icon">&#9881;</span> Head &mdash; Decision Discipline</h3>
                     <p>Rigorous analysis drives sound decisions. Data-informed strategy, systematic execution, and continuous optimization. The discipline to measure what matters and the clarity to communicate complex ideas simply.</p>
-                    <ul style="margin-top: 1rem; opacity: 0.9; font-size: 0.9rem; padding-left: 1.25rem;">
+                    <ul>
                         <li>Data-Driven Decision Discipline</li>
                         <li>Strategic Clarity & Decision Rights</li>
                         <li>Operating Cadence & Accountability</li>
@@ -62,7 +72,7 @@
                     </ul>
                 </div>
             </div>
-            <p class="subtitle" style="margin-top: 2rem; font-weight: 600;">Balanced leadership isn't philosophy. It's risk management.</p>
+            <p class="subtitle subtitle--bold">Balanced leadership isn't philosophy. It's risk management.</p>
         </div>
     </section>
 
@@ -74,15 +84,15 @@
             <button class="cta-button" onclick="openAssessment()">Start the Diagnostic</button>
             <div class="assessment-benefits">
                 <div class="benefit">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
                     <span>5-minute diagnostic</span>
                 </div>
                 <div class="benefit">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
                     <span>Instant visual results</span>
                 </div>
                 <div class="benefit">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
                     <span>Actionable risk insights</span>
                 </div>
             </div>
@@ -105,7 +115,7 @@
     </footer>
 
     <!-- Assessment Modal -->
-    <div class="modal-overlay" id="assessmentModal">
+    <div class="modal-overlay" id="assessmentModal" role="dialog" aria-modal="true" aria-label="Executive Alignment Risk Scan">
         <div class="modal">
             <button class="modal-close" onclick="closeAssessment()">&times;</button>
             <div class="modal-content">

@@ -315,6 +315,15 @@ section {
     background: var(--bg-white);
 }
 
+.about-intro {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-medium);
+    text-align: center;
+}
+
 .about-container {
     max-width: 1000px;
     margin: 0 auto;
@@ -579,6 +588,33 @@ section {
 .pillar p {
     opacity: 0.9;
     font-size: 0.95rem;
+}
+
+.pillar ul {
+    margin-top: 1rem;
+    opacity: 0.9;
+    font-size: 0.9rem;
+    padding-left: 1.25rem;
+}
+
+.subtitle--italic {
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+.subtitle--bold {
+    margin-top: 2rem;
+    font-weight: 600;
+}
+
+.optional-label {
+    font-weight: 400;
+    color: var(--text-light);
+}
+
+.final-cta .assessment-benefits {
+    justify-content: flex-start;
+    margin-top: 1.5rem;
 }
 
 /* Assessment CTA Section */
@@ -1817,6 +1853,20 @@ footer p {
     font-size: 2rem;
     color: var(--primary);
     margin-bottom: 3rem;
+}
+
+.familiar-subtitle {
+    text-align: center;
+    color: var(--text-medium);
+    font-size: 1.15rem;
+    max-width: 700px;
+    margin: -2rem auto 3rem;
+}
+
+.familiar-cta-text {
+    color: var(--text-medium);
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
 }
 
 .familiar-grid {
