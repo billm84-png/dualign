@@ -91,6 +91,18 @@
                     <label for="message">How can we help?</label>
                     <textarea id="message" name="message" placeholder="Tell us about your current challenges or what you're looking to accomplish..." required></textarea>
                 </div>
+                <div class="form-group">
+                    <label for="referralSource">How did you hear about us? <span class="optional-label">(optional)</span></label>
+                    <select id="referralSource" name="referralSource">
+                        <option value="">Select one...</option>
+                        <option value="Google Search">Google Search</option>
+                        <option value="LinkedIn">LinkedIn</option>
+                        <option value="Referral">Referral</option>
+                        <option value="Industry Event / Conference">Industry Event / Conference</option>
+                        <option value="Podcast / Webinar">Podcast / Webinar</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
                 <button type="submit" class="submit-button" id="submitBtn">Send Message</button>
             </form>
             <div id="formStatus"></div>
@@ -135,7 +147,8 @@
                 email: document.getElementById('email').value,
                 company: document.getElementById('company').value,
                 phone: document.getElementById('phone').value,
-                message: document.getElementById('message').value
+                message: document.getElementById('message').value,
+                referralSource: document.getElementById('referralSource').value
             };
 
             fetch(GOOGLE_SCRIPT_URL, {

@@ -190,6 +190,17 @@ function submitLead(e) {
     const sendCopyCheckbox = document.getElementById('sendCopy');
     const sendCopy = sendCopyCheckbox ? sendCopyCheckbox.checked : false;
 
+    // Build question responses array
+    var responses = questions.map(function(q, idx) {
+        return {
+            category: q.category,
+            riskLabel: q.riskLabel,
+            question: q.text,
+            rating: answers[idx],
+            ratingLabel: ratingLabels[answers[idx] - 1]
+        };
+    });
+
     leadData = {
         type: 'assessment',
         name: document.getElementById('leadName').value,
@@ -202,7 +213,8 @@ function submitLead(e) {
         totalScore: totalScore,
         profileType: profile.type,
         insights: profile.insights,
-        sendCopy: sendCopy
+        sendCopy: sendCopy,
+        responses: responses
     };
 
     // Send data to Google Apps Script
@@ -261,6 +273,155 @@ function showResults() {
     const profile = getProfile(heartPct, headPct, totalScore);
     document.getElementById('profileType').textContent = profile.type;
     document.getElementById('insightsText').textContent = profile.insights;
+}
+
+function downloadResultsPDF() {
+    // Calculate scores
+    var heartScore = 0;
+    var headScore = 0;
+    questions.forEach(function(q, idx) {
+        if (q.category === 'heart') {
+            heartScore += answers[idx];
+        } else {
+            headScore += answers[idx];
+        }
+    });
+    var heartPct = Math.round((heartScore / 25) * 100);
+    var headPct = Math.round((headScore / 25) * 100);
+    var totalScore = heartScore + headScore;
+    var profile = getProfile(heartPct, headPct, totalScore);
+    var firstName = leadData.name ? leadData.name.split(' ')[0] : '';
+
+    // Notify Bill of download
+    if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                type: 'assessment-download',
+                name: leadData.name || '',
+                email: leadData.email || '',
+                company: leadData.company || '',
+                role: leadData.role || '',
+                heartScore: heartPct,
+                headScore: headPct,
+                profileType: profile.type,
+                insights: profile.insights,
+                responses: leadData.responses || []
+            })
+        }).catch(function() {});
+    }
+
+    // Helper to replace HTML entities with Unicode for Blob rendering
+    function pdfSafe(str) {
+        return str.replace(/&mdash;/g, '\u2014').replace(/&ndash;/g, '\u2013').replace(/&ldquo;/g, '\u201C').replace(/&rdquo;/g, '\u201D');
+    }
+
+    var profileTypeText = pdfSafe(profile.type);
+    var insightsText = pdfSafe(profile.insights);
+
+    // Build printable HTML
+    var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Executive Alignment Results - ' + (leadData.name || 'Dualign') + '</title>' +
+        '<style>' +
+        'body { font-family: Arial, Helvetica, sans-serif; max-width: 700px; margin: 0 auto; padding: 40px 30px; color: #2d3748; }' +
+        '.header { text-align: center; border-bottom: 3px solid #1a365d; padding-bottom: 20px; margin-bottom: 30px; }' +
+        '.header h1 { color: #1a365d; font-size: 22px; margin: 0 0 4px; }' +
+        '.header p { color: #718096; font-size: 13px; margin: 0; }' +
+        '.greeting { font-size: 16px; margin-bottom: 24px; }' +
+        '.scores { display: flex; justify-content: center; gap: 40px; margin: 24px 0; }' +
+        '.score-box { text-align: center; padding: 16px 24px; border-radius: 8px; }' +
+        '.score-box.heart { background: #fff5f5; border: 2px solid #e53e3e; }' +
+        '.score-box.head { background: #ebf8ff; border: 2px solid #3182ce; }' +
+        '.score-box .number { font-size: 36px; font-weight: 700; }' +
+        '.score-box.heart .number { color: #e53e3e; }' +
+        '.score-box.head .number { color: #3182ce; }' +
+        '.score-box .label { font-size: 13px; color: #718096; margin-top: 4px; }' +
+        '.profile-badge { display: inline-block; background: #1a365d; color: white; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 600; margin-bottom: 12px; }' +
+        '.insights { background: #f7fafc; border-radius: 8px; padding: 20px; margin: 24px 0; }' +
+        '.insights h3 { color: #1a365d; margin: 0 0 10px; font-size: 16px; }' +
+        '.insights p { line-height: 1.6; font-size: 14px; margin: 0; }' +
+        '.responses { margin: 24px 0; }' +
+        '.responses h3 { color: #1a365d; font-size: 16px; margin: 0 0 14px; }' +
+        '.response-group h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin: 16px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #e2e8f0; }' +
+        '.response-group h4.heart { color: #e53e3e; }' +
+        '.response-group h4.head { color: #3182ce; }' +
+        '.response-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 6px 0; font-size: 13px; border-bottom: 1px solid #f0f0f0; }' +
+        '.response-item:last-child { border-bottom: none; }' +
+        '.response-q { flex: 1; line-height: 1.4; }' +
+        '.response-risk { color: #718096; font-size: 11px; }' +
+        '.response-rating { flex-shrink: 0; font-weight: 600; white-space: nowrap; font-size: 12px; padding: 2px 8px; border-radius: 4px; background: #f7fafc; }' +
+        '.next-steps { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; }' +
+        '.next-steps h3 { color: #1a365d; font-size: 16px; margin: 0 0 10px; }' +
+        '.next-steps p { font-size: 14px; line-height: 1.6; }' +
+        '.footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e8f0; text-align: center; font-size: 12px; color: #a0aec0; }' +
+        '@media print { body { padding: 20px; } }' +
+        '</style></head><body>' +
+        '<div class="header"><h1>Executive Alignment Risk Scan</h1><p>Dualign | Leadership in Balance &mdash; dualign.io</p></div>' +
+        '<p class="greeting">' + (firstName ? firstName + ', here' : 'Here') + '\'s your leadership alignment profile:</p>' +
+        '<div class="scores">' +
+        '<div class="score-box heart"><div class="number">' + heartPct + '%</div><div class="label">Heart Score</div></div>' +
+        '<div class="score-box head"><div class="number">' + headPct + '%</div><div class="label">Head Score</div></div>' +
+        '</div>' +
+        '<div class="insights">' +
+        '<span class="profile-badge">' + profileTypeText + '</span>' +
+        '<h3>Your Insights</h3>' +
+        '<p>' + insightsText + '</p>' +
+        '</div>' +
+        '<div class="responses">' +
+        '<h3>Your Responses</h3>' +
+        '<div class="response-group"><h4 class="heart">\u2665 Heart \u2014 Risk Management</h4>';
+
+    questions.forEach(function(q, idx) {
+        if (q.category === 'heart') {
+            html += '<div class="response-item">' +
+                '<div class="response-q">' + q.text + '<br><span class="response-risk">' + q.riskLabel + '</span></div>' +
+                '<div class="response-rating">' + answers[idx] + '/5 \u2014 ' + ratingLabels[answers[idx] - 1] + '</div>' +
+                '</div>';
+        }
+    });
+
+    html += '</div><div class="response-group"><h4 class="head">\u2699 Head \u2014 Decision Discipline</h4>';
+
+    questions.forEach(function(q, idx) {
+        if (q.category === 'head') {
+            html += '<div class="response-item">' +
+                '<div class="response-q">' + q.text + '<br><span class="response-risk">' + q.riskLabel + '</span></div>' +
+                '<div class="response-rating">' + answers[idx] + '/5 \u2014 ' + ratingLabels[answers[idx] - 1] + '</div>' +
+                '</div>';
+        }
+    });
+
+    html += '</div></div>' +
+        '<div class="next-steps">' +
+        '<h3>What\'s Next?</h3>' +
+        '<p>Your results reveal opportunities to strengthen your leadership approach. If you\'d like to explore how to build on your strengths and address gaps, I\'d welcome a conversation.</p>' +
+        '<p><strong>Bill Maggio</strong> | bill@dualign.io | (475) 284-5315<br>dualign.io/contact</p>' +
+        '</div>' +
+        '<div class="footer">Dualign &copy; 2026 | This assessment is for informational purposes only.</div>' +
+        '</body></html>';
+
+    // Use Blob URL to avoid popup blockers
+    var blob = new Blob([html], { type: 'text/html' });
+    var url = URL.createObjectURL(blob);
+    var printWindow = window.open(url, '_blank');
+
+    if (printWindow) {
+        printWindow.onload = function() {
+            printWindow.focus();
+            printWindow.print();
+            URL.revokeObjectURL(url);
+        };
+    } else {
+        // Fallback: download as HTML file if popup blocked
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'Dualign-Assessment-Results.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+    }
 }
 
 function getProfile(heart, head, totalScore) {

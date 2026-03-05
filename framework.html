@@ -48,8 +48,32 @@
         <div class="framework-container">
             <p class="subtitle">The most effective leaders combine emotional intelligence with analytical rigor. This framework guides how we approach every engagement.</p>
             <p class="subtitle subtitle--italic">Head without Heart creates rigidity. Heart without Head creates drift.</p>
+
+            <div class="framework-quadrant">
+                <div class="fq-grid">
+                    <div class="fq-cell fq-top-left">
+                        <span class="fq-icon">&#9829;</span>
+                        <span class="fq-label">Culture Strong<br>Systems Weak</span>
+                    </div>
+                    <div class="fq-cell fq-top-right">
+                        <span class="fq-icon">&#9733;</span>
+                        <span class="fq-label">Balanced<br>Leadership</span>
+                    </div>
+                    <div class="fq-cell fq-bottom-left">
+                        <span class="fq-icon">&#9888;</span>
+                        <span class="fq-label">Fracture<br>Zone</span>
+                    </div>
+                    <div class="fq-cell fq-bottom-right">
+                        <span class="fq-icon">&#9881;</span>
+                        <span class="fq-label">Systems Strong<br>Culture Fragile</span>
+                    </div>
+                    <div class="fq-axis-x"><span>HEAD &rarr;</span></div>
+                    <div class="fq-axis-y"><span>&uarr; HEART</span></div>
+                </div>
+            </div>
+
             <div class="framework-pillars">
-                <div class="pillar">
+                <div class="pillar pillar--heart">
                     <h3><span class="pillar-icon">&#9829;</span> Heart &mdash; Risk Management</h3>
                     <p>Trust is the operating system beneath every high-performing team. When your people feel safe to speak candidly, problems surface early, talent stays engaged, and change strengthens culture rather than fractures it.</p>
                     <ul>
@@ -60,7 +84,12 @@
                         <li>Transformation Without Cultural Fracture</li>
                     </ul>
                 </div>
-                <div class="pillar">
+                <div class="pillar-connector" aria-hidden="true">
+                    <div class="connector-line"></div>
+                    <div class="connector-label">Operational Clarity</div>
+                    <div class="connector-line"></div>
+                </div>
+                <div class="pillar pillar--head">
                     <h3><span class="pillar-icon">&#9881;</span> Head &mdash; Decision Discipline</h3>
                     <p>Rigorous analysis drives sound decisions. Data-informed strategy, systematic execution, and continuous optimization. The discipline to measure what matters and the clarity to communicate complex ideas simply.</p>
                     <ul>
@@ -72,6 +101,33 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="misalignment-costs">
+                <h3>What Misalignment Costs You</h3>
+                <div class="costs-grid">
+                    <div class="cost-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        <h4>Slower Decisions</h4>
+                        <p>Missed quarters and delayed market response</p>
+                    </div>
+                    <div class="cost-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <h4>Higher Attrition</h4>
+                        <p>Top talent leaves before you see it coming</p>
+                    </div>
+                    <div class="cost-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        <h4>Stalled Transformation</h4>
+                        <p>Investment in change with no return</p>
+                    </div>
+                    <div class="cost-card">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M20 12a8 8 0 0 0-8-8v8h8z"/></svg>
+                        <h4>Leadership Friction</h4>
+                        <p>A hidden tax on EBITDA every quarter</p>
+                    </div>
+                </div>
+            </div>
+
             <p class="subtitle subtitle--bold">Balanced leadership isn't philosophy. It's risk management.</p>
         </div>
     </section>
@@ -245,6 +301,13 @@
                             <span class="profile-type" id="profileType">Balanced Leader</span>
                             <h3>&#128161; Your Insights</h3>
                             <p id="insightsText">Based on your responses, here are key observations about your organization's leadership balance.</p>
+                        </div>
+
+                        <div class="results-actions">
+                            <button class="results-download-btn" onclick="downloadResultsPDF()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                Download Results (PDF)
+                            </button>
                         </div>
 
                         <div class="results-cta">

@@ -51,9 +51,9 @@ By default, Google Apps Script sends email from your Gmail address (e.g. billm84
 6. Name it **"Contact Inquiries"**
 7. Add these column headers in row 1:
 
-| A | B | C | D | E | F | G |
-|---|---|---|---|---|---|---|
-| Timestamp | Name | Email | Company | Phone | Message | Confirmation Sent |
+| A | B | C | D | E | F | G | H |
+|---|---|---|---|---|---|---|---|
+| Timestamp | Name | Email | Company | Phone | Message | Referral Source | Confirmation Sent |
 
 ### Tasks tab
 8. Click the **+** button to add a new sheet tab
@@ -97,6 +97,8 @@ function doPost(e) {
       handleTodoAction(data);
     } else if (data.type === 'contact') {
       handleContactSubmission(data);
+    } else if (data.type === 'assessment-download') {
+      handleAssessmentDownload(data);
     } else {
       handleAssessmentSubmission(data);
     }
@@ -158,6 +160,30 @@ function handleAssessmentSubmission(data) {
   }
 }
 
+function formatResponses(responses) {
+  if (!responses || !responses.length) return '';
+  var text = '\nQUESTION-BY-QUESTION RESPONSES\n' +
+    '================================\n\n';
+  var heartResponses = responses.filter(function(r) { return r.category === 'heart'; });
+  var headResponses = responses.filter(function(r) { return r.category === 'head'; });
+
+  text += 'HEART — Risk Management\n' +
+    '------------------------\n';
+  heartResponses.forEach(function(r) {
+    text += '  [' + r.rating + '/5 ' + r.ratingLabel + '] ' + r.question + '\n' +
+      '    Risk: ' + r.riskLabel + '\n\n';
+  });
+
+  text += 'HEAD — Decision Discipline\n' +
+    '--------------------------\n';
+  headResponses.forEach(function(r) {
+    text += '  [' + r.rating + '/5 ' + r.ratingLabel + '] ' + r.question + '\n' +
+      '    Risk: ' + r.riskLabel + '\n\n';
+  });
+
+  return text;
+}
+
 function sendAssessmentNotification(data) {
   var subject = 'New Assessment Lead: ' + data.name;
 
@@ -172,6 +198,10 @@ function sendAssessmentNotification(data) {
     'Heart Score: ' + data.heartScore + '%\n' +
     'Head Score: ' + data.headScore + '%\n' +
     'Profile Type: ' + data.profileType + '\n\n' +
+    'INSIGHTS\n' +
+    '--------\n' +
+    (data.insights || '') + '\n\n' +
+    formatResponses(data.responses) +
     'User requested copy: ' + (data.sendCopy ? 'Yes' : 'No') + '\n\n' +
     '---\n' +
     'View all leads: https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID;
@@ -195,6 +225,7 @@ function sendAssessmentResultsToUser(data) {
     'INSIGHTS\n' +
     '--------\n' +
     data.insights + '\n\n' +
+    formatResponses(data.responses) +
     'WHAT\'S NEXT?\n' +
     '------------\n' +
     'Your results reveal opportunities to strengthen your leadership approach. ' +
@@ -214,6 +245,37 @@ function sendAssessmentResultsToUser(data) {
 }
 
 // ============================================================
+// ASSESSMENT PDF DOWNLOAD HANDLER
+// ============================================================
+
+function handleAssessmentDownload(data) {
+  var subject = 'Assessment PDF Downloaded: ' + data.name;
+
+  var body = 'Assessment Results PDF Downloaded\n\n' +
+    'Name: ' + data.name + '\n' +
+    'Email: ' + data.email + '\n' +
+    'Company: ' + (data.company || 'Not provided') + '\n' +
+    'Role: ' + (data.role || 'Not provided') + '\n\n' +
+    'RESULTS\n' +
+    '-------\n' +
+    'Heart Score: ' + data.heartScore + '%\n' +
+    'Head Score: ' + data.headScore + '%\n' +
+    'Profile Type: ' + data.profileType + '\n\n' +
+    'INSIGHTS\n' +
+    '--------\n' +
+    data.insights + '\n\n' +
+    formatResponses(data.responses) +
+    '---\n' +
+    'This person downloaded their assessment results as a PDF.\n' +
+    'View all leads: https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID;
+
+  GmailApp.sendEmail(NOTIFICATION_EMAIL, subject, body, {
+    from: FROM_EMAIL,
+    replyTo: data.email
+  });
+}
+
+// ============================================================
 // CONTACT FORM HANDLER
 // ============================================================
 
@@ -227,6 +289,7 @@ function handleContactSubmission(data) {
     data.company || '',
     data.phone || '',
     data.message,
+    data.referralSource || '',
     'Yes'
   ]);
 
@@ -241,7 +304,8 @@ function sendContactNotification(data) {
     'Name: ' + data.name + '\n' +
     'Email: ' + data.email + '\n' +
     'Company: ' + (data.company || 'Not provided') + '\n' +
-    'Phone: ' + (data.phone || 'Not provided') + '\n\n' +
+    'Phone: ' + (data.phone || 'Not provided') + '\n' +
+    'How they heard about us: ' + (data.referralSource || 'Not provided') + '\n\n' +
     'MESSAGE\n' +
     '-------\n' +
     data.message + '\n\n' +

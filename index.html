@@ -102,6 +102,16 @@
           </div>
     </div>
 
+    <section class="social-proof-bar">
+        <div class="social-proof-container">
+            <div class="social-proof-quote">
+                <span class="social-proof-mark">&ldquo;</span>
+                <blockquote>Thanks for keeping the ship on course during some rough waters.</blockquote>
+                <span class="social-proof-attr">&mdash; Operations Leader</span>
+            </div>
+        </div>
+    </section>
+
     <section class="familiar-section">
         <div class="familiar-container">
             <h2>Sound Familiar?</h2>
@@ -238,11 +248,35 @@
             </ul>
         </div>
     </footer>
+    <div class="sticky-cta" id="stickyCta">
+        <div class="sticky-cta-container">
+            <span class="sticky-cta-text">How aligned is your leadership team?</span>
+            <a href="framework.html#assessment" class="sticky-cta-button">Take the Assessment</a>
+        </div>
+    </div>
+
     <script>
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             this.classList.toggle('active');
             document.querySelector('.nav-links').classList.toggle('active');
         });
+
+        // Sticky CTA: show after scrolling past hero, hide near footer
+        (function() {
+            var stickyCta = document.getElementById('stickyCta');
+            var hero = document.querySelector('.hero');
+            var footer = document.querySelector('footer');
+            window.addEventListener('scroll', function() {
+                var scrollY = window.scrollY || window.pageYOffset;
+                var heroBottom = hero.offsetTop + hero.offsetHeight;
+                var footerTop = footer.offsetTop - window.innerHeight;
+                if (scrollY > heroBottom && scrollY < footerTop) {
+                    stickyCta.classList.add('visible');
+                } else {
+                    stickyCta.classList.remove('visible');
+                }
+            });
+        })();
     </script>
 </body>
 </html>
