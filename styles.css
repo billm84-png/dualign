@@ -1244,6 +1244,14 @@ footer p {
     margin-left: 0.5rem;
 }
 
+.footer-about {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    max-width: 600px;
+    margin: 0.5rem auto 0.75rem;
+    line-height: 1.6;
+}
+
 /* Assessment Modal */
 .modal-overlay {
     display: none;
@@ -2187,6 +2195,54 @@ footer p {
     width: 1px;
     height: 40px;
     background: rgba(255,255,255,0.3);
+}
+
+/* About Brief (AEO entity paragraph) */
+.about-brief {
+    padding: 2rem 2rem 0;
+    text-align: center;
+}
+
+.about-brief-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-brief-container p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-medium);
+}
+
+/* Credibility Attribution */
+.credibility-attribution {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--text-medium);
+    padding: 1rem 2rem 0;
+    margin: 0;
+}
+
+.credibility-attribution a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.credibility-attribution a:hover {
+    color: var(--primary);
+}
+
+/* Quadrant Summary (AEO crawlable text) */
+.quadrant-summary {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.quadrant-summary p {
+    font-size: 1rem;
+    line-height: 1.7;
+    opacity: 0.9;
 }
 
 /* Social Proof Bar */
