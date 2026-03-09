@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LEG9BMMMPV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-LEG9BMMMPV');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Dualign</title>
@@ -57,7 +65,11 @@
             "Operating Rhythm Design",
             "Strategic Planning",
             "Founder Gap"
-        ]
+        ],
+        "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".page-header h1", ".about-intro p:first-of-type", ".proven-theses h4"]
+        }
     }
     </script>
     <script type="application/ld+json">

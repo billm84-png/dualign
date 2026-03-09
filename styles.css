@@ -167,9 +167,17 @@ nav {
 
 .hero-content .tagline {
     font-size: 1.1rem;
-    color: var(--text-light);
+    color: var(--text-medium);
     margin-bottom: 0.75rem;
     max-width: 500px;
+}
+
+.hero-philosophy {
+    font-size: 1rem;
+    color: var(--text-medium);
+    line-height: 1.75;
+    max-width: 520px;
+    margin-bottom: 1.25rem;
 }
 
 .hero-triggers {
@@ -997,6 +1005,95 @@ section {
 .assessment-cta .cta-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* PDF Download Card */
+.pdf-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    margin-top: 1.5rem;
+    text-decoration: none;
+    color: white;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.pdf-download:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+
+.pdf-download-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    opacity: 0.9;
+}
+
+.pdf-download-text {
+    text-align: left;
+}
+
+.pdf-download-title {
+    display: block;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+}
+
+.pdf-download-desc {
+    display: block;
+    font-size: 0.8rem;
+    opacity: 0.75;
+}
+
+/* PDF Download Card — Contact page variant (light background) */
+.contact-pdf-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: background 0.2s, transform 0.2s, border-color 0.2s;
+}
+
+.contact-pdf-download:hover {
+    background: white;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.contact-pdf-download .pdf-download-icon {
+    color: var(--accent);
+}
+
+.contact-pdf-download .pdf-download-title {
+    color: var(--primary);
+}
+
+.contact-pdf-download .pdf-download-desc {
+    color: var(--text-light);
+}
+
+.contact-download-wrapper {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+}
+
+.contact-download-wrapper p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
 }
 
 .assessment-benefits {
@@ -2191,9 +2288,18 @@ footer p {
     letter-spacing: 0.05em;
 }
 
+.cred-context {
+    display: block;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-top: 0.35rem;
+    font-style: italic;
+    line-height: 1.4;
+}
+
 .cred-divider {
     width: 1px;
-    height: 40px;
+    height: 60px;
     background: rgba(255,255,255,0.3);
 }
 
@@ -2246,6 +2352,37 @@ footer p {
 }
 
 /* Social Proof Bar */
+/* Heart & Head Difference Section */
+.heart-head-difference {
+    background: var(--bg-light);
+    padding: 4rem 2rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.heart-head-difference-container {
+    max-width: 750px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.heart-head-difference-container h2 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.heart-head-difference-container p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-medium);
+    margin-bottom: 1rem;
+}
+
+.heart-head-difference-container p:last-child {
+    margin-bottom: 0;
+}
+
 .social-proof-bar {
     background: var(--bg-light);
     padding: 2.5rem 2rem;
@@ -3381,6 +3518,15 @@ footer p {
     }
 
     .cred-number {
+        font-size: 1.75rem;
+    }
+
+    /* Heart & Head Difference responsive */
+    .heart-head-difference {
+        padding: 3rem 1.5rem;
+    }
+
+    .heart-head-difference-container h2 {
         font-size: 1.75rem;
     }
 
