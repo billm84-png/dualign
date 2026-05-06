@@ -350,7 +350,7 @@ function downloadResultsPDF() {
         '.footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e2e8f0; text-align: center; font-size: 12px; color: #a0aec0; }' +
         '@media print { body { padding: 20px; } }' +
         '</style></head><body>' +
-        '<div class="header"><h1>Executive Alignment Risk Scan</h1><p>Dualign | Leadership in Balance &mdash; dualign.io</p></div>' +
+        '<div class="header"><h1>Executive Alignment Risk Scan</h1><p>Dualign | Leadership in Balance | dualign.io</p></div>' +
         '<p class="greeting">' + (firstName ? firstName + ', here' : 'Here') + '\'s your leadership alignment profile:</p>' +
         '<div class="scores">' +
         '<div class="score-box heart"><div class="number">' + heartPct + '%</div><div class="label">Heart Score</div></div>' +
@@ -428,7 +428,7 @@ function getProfile(heart, head, totalScore) {
         if (heart >= 60 && head >= 60) {
             return {
                 type: 'High-Performance Zone',
-                insights: `Disciplined alignment across both dimensions. Your organization shows strong execution transparency and decision discipline. Your risk is complacency — this balance is hard-won and easy to lose during rapid growth, leadership transitions, or market disruption. Protect what you've built by stress-testing your systems against a 2x scale scenario.`
+                insights: `Disciplined alignment across both dimensions. Your organization shows strong execution transparency and decision discipline. Your risk is complacency. This balance is hard-won and easy to lose during rapid growth, leadership transitions, or market disruption. Protect what you've built by stress-testing your systems against a 2x scale scenario.`
             };
         } else if (heart >= 60) {
             return {
@@ -438,7 +438,7 @@ function getProfile(heart, head, totalScore) {
         } else {
             return {
                 type: 'High-Performance Zone — Head-Heavy',
-                insights: `Strong systems and decision discipline, but your execution transparency scores suggest bad news may be traveling too slowly. High-performing teams with weak psychological safety eventually lose their best people — or worse, lose visibility into operational risks until it's too late. Invest in conflict resolution speed and succession depth.`
+                insights: `Strong systems and decision discipline, but your execution transparency scores suggest bad news may be traveling too slowly. High-performing teams with weak psychological safety eventually lose their best people, or worse, lose visibility into operational risks until it's too late. Invest in conflict resolution speed and succession depth.`
             };
         }
     } else if (totalScore >= 25) {
@@ -451,7 +451,7 @@ function getProfile(heart, head, totalScore) {
         } else if (heart < 60 && head >= 60) {
             return {
                 type: 'Friction Zone — Systems Strong, Culture Fragile',
-                insights: `Your operating rhythms and accountability structures are solid, but leadership friction is creating drag. When C-suite conflicts require CEO mediation, when bad news gets polished before it reaches you, and when your best people can't connect their work to the company's future — you have a retention and execution transparency problem that metrics alone won't solve.`
+                insights: `Your operating rhythms and accountability structures are solid, but leadership friction is creating drag. When C-suite conflicts require CEO mediation, when bad news gets polished before it reaches you, and when your best people can't connect their work to the company's future, you have a retention and execution transparency problem that metrics alone won't solve.`
             };
         } else {
             return {
