@@ -228,11 +228,11 @@ Bill Maggio brings DCSA, NISPOM, ITAR/EAR, and Government Security Committee exp
 
 ## Latest Insights (LinkedIn)
 
-1. **Cultural Fracture Is Not a Morale Problem. It Is an Operational Risk.** — When AI adoption accelerates, silence often masks dysfunction rather than alignment. High performers become passive, middle management prioritizes self-protection, and skeptics fill communication gaps. Leaders cannot manage what they cannot identify — direct, honest conversations are the only way to diagnose actual organizational health during technology transitions.
+1. **AI Creates a Development Ceiling. Most Leaders Haven't Hit It Yet.** — Organizations are deploying AI faster than they're building the judgment to use it well. New Wharton research documents the result: users gain unwarranted confidence while quietly accepting AI errors. They call it cognitive surrender. Judgment in high-stakes environments comes from mentorship, real accountability, and intentional knowledge transfer, and most organizations have stopped investing in all three.
 
-2. **The ROI Model Looked Great. Nobody Asked About Trust.** — Deploying AI faster than your competitors is a short-term win. Building a workforce that can adapt to the next wave is the actual prize. Those two goals require completely different leadership behaviors — and right now most organizations are only investing in one of them.
+2. **Cultural Fracture Is Not a Morale Problem. It Is an Operational Risk.** — When AI adoption accelerates, silence often masks dysfunction rather than alignment. High performers become passive, middle management prioritizes self-protection, and skeptics fill communication gaps. Leaders cannot manage what they cannot identify — direct, honest conversations are the only way to diagnose actual organizational health during technology transitions.
 
-3. **AI Should Remove Management Friction, Not Just Add Output** — Many management layers exist because information once moved slowly. AI changes that. The opportunity is to eliminate friction that no longer serves a purpose and refocus leadership on judgment and decision-making.
+3. **The ROI Model Looked Great. Nobody Asked About Trust.** — Deploying AI faster than your competitors is a short-term win. Building a workforce that can adapt to the next wave is the actual prize. Those two goals require completely different leadership behaviors — and right now most organizations are only investing in one of them.
 
 ---
 
