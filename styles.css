@@ -2750,6 +2750,12 @@ footer p {
     color: #0077b5;
 }
 
+/* Homepage "Long-Form Essays" teaser — white bg so it alternates with the
+   bg-light LinkedIn section directly above it */
+.linkedin-insights.home-essays {
+    background: var(--bg-white);
+}
+
 /* Insights Page (Substack articles) */
 .insights-page-section {
     padding: 4rem 2rem 6rem;

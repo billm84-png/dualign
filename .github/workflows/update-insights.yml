@@ -39,8 +39,8 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if [ -n "$(git status --porcelain insights.html llms-full.txt sitemap.xml)" ]; then
-            git add insights.html llms-full.txt sitemap.xml
+          if [ -n "$(git status --porcelain insights.html index.html llms-full.txt sitemap.xml)" ]; then
+            git add insights.html index.html llms-full.txt sitemap.xml
             git commit -m "Auto-update Insights from Substack feed"
             git push
           else

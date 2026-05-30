@@ -153,6 +153,29 @@ def render_cards(items):
     return "\n".join(cards)
 
 
+def render_home_cards(items, limit=3):
+    """Compact teaser cards for the homepage, matching the .linkedin-card look
+    (no images) used by the adjacent 'Latest Insights' section."""
+    if not items:
+        return ('                <p class="insights-empty">Latest essays are loading. '
+                'Read them on <a href="insights.html">Insights</a>.</p>')
+    cards = []
+    for a in items[:limit]:
+        title = html.escape(a["title"])
+        excerpt = html.escape(a["excerpt"])
+        topic = html.escape(a["topic"])
+        link = html.escape(a["link"], quote=True)
+        cards.append(
+            f'                <a href="{link}" target="_blank" rel="noopener noreferrer" class="linkedin-card">\n'
+            f'                    <span class="linkedin-topic">{topic}</span>\n'
+            f'                    <h3>{title}</h3>\n'
+            f'                    <p>{excerpt}</p>\n'
+            f'                    <span class="linkedin-read-more">Read on Substack &rarr;</span>\n'
+            f'                </a>'
+        )
+    return "\n".join(cards)
+
+
 def render_jsonld(items):
     blog_posts = []
     for a in items:
@@ -267,6 +290,10 @@ def main():
                 render_cards(items), "insights.html (articles)")
     update_file("insights.html", "<!-- INSIGHTS-JSONLD:START -->", "<!-- INSIGHTS-JSONLD:END -->",
                 render_jsonld(items), "insights.html (json-ld)")
+
+    if (ROOT / "index.html").exists():
+        update_file("index.html", "<!-- HOME-ARTICLES:START -->", "<!-- HOME-ARTICLES:END -->",
+                    render_home_cards(items), "index.html (home teaser)")
 
     if (ROOT / "llms-full.txt").exists():
         update_file("llms-full.txt", "<!-- insights:start -->", "<!-- insights:end -->",

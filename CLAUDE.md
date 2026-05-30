@@ -65,7 +65,10 @@ The Insights page surfaces Bill's Substack essays (feed: `https://williamjmaggio
 - `<!-- ARTICLES:START -->` … `<!-- ARTICLES:END -->` — the `.insight-card` grid
 - `<!-- INSIGHTS-JSONLD:START -->` … `<!-- INSIGHTS-JSONLD:END -->` — the `Blog` + `BlogPosting` JSON-LD
 
-Everything else in `insights.html` (head, nav, footer, CTA) is hand-maintained like the other pages. The generator also rewrites a marker region in `llms-full.txt` (`<!-- insights:start -->` … `<!-- insights:end -->`) and the `insights.html` `<lastmod>` in `sitemap.xml`.
+Everything else in `insights.html` (head, nav, footer, CTA) is hand-maintained like the other pages. The generator also rewrites:
+- the `<!-- HOME-ARTICLES:START -->` … `<!-- HOME-ARTICLES:END -->` region in `index.html` (the "Long-Form Essays" homepage teaser — latest 3 essays as compact `.linkedin-card`-style cards, no images, linking to Substack + "View all insights" to `insights.html`)
+- a marker region in `llms-full.txt` (`<!-- insights:start -->` … `<!-- insights:end -->`)
+- the `insights.html` `<lastmod>` in `sitemap.xml`
 
 `generate_insights.py` is **stdlib-only** (no pip installs) so it runs unchanged in CI. Topic labels are keyword-derived (no categories in the feed); excerpts come from the RSS `description` (the Substack subtitle). Regenerate manually with `python3 generate_insights.py`.
 
