@@ -115,6 +115,7 @@ def render_jsonld(posts):
                     "@type": "Person",
                     "@id": "https://dualign.io/about.html#bill-maggio",
                     "name": "Bill Maggio",
+                    "url": "https://dualign.io/about.html",
                 },
                 "publisher": {
                     "@type": "Organization",

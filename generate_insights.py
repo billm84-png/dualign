@@ -288,6 +288,7 @@ def render_jsonld(items):
                 "@type": "Person",
                 "@id": f"{SITE_ORIGIN}/about.html#bill-maggio",
                 "name": "Bill Maggio",
+                "url": f"{SITE_ORIGIN}/about.html",
             },
             "publisher": {
                 "@type": "Organization",
@@ -317,6 +318,7 @@ def render_jsonld(items):
             "@type": "Person",
             "@id": f"{SITE_ORIGIN}/about.html#bill-maggio",
             "name": "Bill Maggio",
+            "url": f"{SITE_ORIGIN}/about.html",
         },
         "blogPost": blog_posts,
     }
