@@ -72,6 +72,8 @@ Everything else in `insights.html` (head, nav, footer, CTA) is hand-maintained l
 
 `generate_insights.py` is **stdlib-only** (no pip installs) so it runs unchanged in CI. Topic labels are keyword-derived (no categories in the feed); excerpts come from the RSS `description` (the Substack subtitle). Regenerate manually with `python3 generate_insights.py`.
 
+**Feed fetch has a fallback (this matters):** Substack sits behind Cloudflare, which **403s the GitHub Actions datacenter IPs** (works locally, fails in CI — the block is IP-based, not User-Agent). So `get_items()` tries the Substack feed directly first (used for local runs), then falls back to **rss2json** (`api.rss2json.com`, free tier, no key) which fetches server-side from an unblocked IP. Both sources normalize through `build_item()` to the same dict. Image URLs are collapsed to their underlying S3 original by `normalize_image()` because the two sources wrap images with different Cloudflare transforms — without that, `insights.html` would flip-flop on every alternating local/CI run. Output is idempotent across both sources.
+
 **Automation:** `.github/workflows/update-insights.yml` runs the generator daily (13:00 UTC) and on manual dispatch, committing changes back to `main` so GitHub Pages redeploys. New essays appear without manual work. Card styling lives in `styles.css` under `/* Insights Page */` (`.insight-card`, `.insights-grid`, etc.).
 
 ### Assessment Flow (assessment.js + framework.html)
