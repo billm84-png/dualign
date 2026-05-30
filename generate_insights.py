@@ -22,6 +22,7 @@ import re
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
@@ -78,68 +79,125 @@ def strip_html(raw):
     return re.sub(r"\s+", " ", text).strip()
 
 
-def make_excerpt(item):
-    desc = strip_html(item.findtext("description") or "")
-    if not desc:
-        content_el = item.find("content:encoded", CONTENT_NS)
-        desc = strip_html(content_el.text if content_el is not None else "")
+def truncate_excerpt(desc):
+    desc = (desc or "").strip()
     if len(desc) <= EXCERPT_CHARS:
         return desc
     cut = desc[:EXCERPT_CHARS].rsplit(" ", 1)[0].rstrip(",.;:")
     return cut + "…"
 
 
-def pick_topic(item):
-    haystack = ((item.findtext("title") or "") + " " +
-                (item.findtext("description") or "")).lower()
+def pick_topic(haystack):
+    haystack = (haystack or "").lower()
     for keywords, label in TOPIC_RULES:
         if any(k in haystack for k in keywords):
             return label
     return DEFAULT_TOPIC
 
 
-def first_image(item):
-    enc = item.find("enclosure")
-    if enc is not None and enc.get("url"):
-        return enc.get("url")
-    content_el = item.find("content:encoded", CONTENT_NS)
-    if content_el is not None and content_el.text:
-        m = re.search(r'<img[^>]+src="([^"]+)"', content_el.text)
+def parse_date(raw):
+    """Handle RFC-822 (direct RSS) and 'YYYY-MM-DD HH:MM:SS' (rss2json)."""
+    raw = (raw or "").strip()
+    if not raw:
+        return None
+    try:
+        dt = parsedate_to_datetime(raw)
+    except (TypeError, ValueError):
+        dt = None
+    if dt is None:
+        for fmt in ("%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%d"):
+            try:
+                dt = datetime.strptime(raw, fmt)
+                break
+            except ValueError:
+                continue
+    if dt is None:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt
+
+
+def build_item(title, link, description_html, content_html, pub_raw, image):
+    """Normalize one post (from either source) into the render dict."""
+    title = strip_html(title)
+    link = (link or "").strip()
+    if not title or not link:
+        return None
+    desc = strip_html(description_html) or strip_html(content_html)
+    if not image and content_html:
+        m = re.search(r'<img[^>]+src="([^"]+)"', content_html)
         if m:
-            return m.group(1)
-    return ""
+            image = m.group(1)
+    dt = parse_date(pub_raw)
+    return {
+        "title": title,
+        "link": link,
+        "excerpt": truncate_excerpt(desc),
+        "topic": pick_topic(title + " " + (description_html or "")),
+        "image": image or "",
+        "date_human": dt.strftime("%B %-d, %Y") if dt else "",
+        "date_iso": dt.date().isoformat() if dt else "",
+    }
 
 
-def parse_items(xml_bytes):
+def items_from_xml(xml_bytes):
     # Defense-in-depth: stdlib ElementTree disables external entity loading, but
     # reject DOCTYPE/ENTITY declarations outright to neutralize XXE and
     # billion-laughs entity-expansion. Legitimate RSS never declares these.
     head = xml_bytes[:4096].lower()
     if b"<!doctype" in head or b"<!entity" in xml_bytes.lower():
-        sys.exit("ERROR: feed contains a DOCTYPE/ENTITY declaration; refusing to parse.")
+        raise ValueError("feed contains a DOCTYPE/ENTITY declaration; refusing to parse.")
     root = ET.fromstring(xml_bytes)
     items = []
     for el in root.findall(".//item")[:MAX_ARTICLES]:
-        title = strip_html(el.findtext("title") or "")
-        link = (el.findtext("link") or "").strip()
-        if not title or not link:
-            continue
-        pub_raw = el.findtext("pubDate") or ""
-        try:
-            pub_dt = parsedate_to_datetime(pub_raw)
-            if pub_dt.tzinfo is None:
-                pub_dt = pub_dt.replace(tzinfo=timezone.utc)
-        except (TypeError, ValueError):
-            pub_dt = None
-        items.append({
-            "title": title,
-            "link": link,
-            "excerpt": make_excerpt(el),
-            "topic": pick_topic(el),
-            "image": first_image(el),
-            "date_human": pub_dt.strftime("%B %-d, %Y") if pub_dt else "",
-            "date_iso": pub_dt.date().isoformat() if pub_dt else "",
-        })
+        content_el = el.find("content:encoded", CONTENT_NS)
+        content_html = content_el.text if content_el is not None else ""
+        enc = el.find("enclosure")
+        image = enc.get("url") if (enc is not None and enc.get("url")) else ""
+        item = build_item(el.findtext("title"), el.findtext("link"),
+                          el.findtext("description"), content_html,
+                          el.findtext("pubDate"), image)
+        if item:
+            items.append(item)
+    return items
+
+
+def items_from_rss2json():
+    """Fallback for environments where Substack's Cloudflare blocks the source
+    IP directly (e.g. GitHub Actions). rss2json fetches server-side and returns
+    normalized JSON; the free tier needs no key for low request volume."""
+    url = "https://api.rss2json.com/v1/api.json?rss_url=" + urllib.parse.quote(FEED_URL, safe="")
+    req = urllib.request.Request(url, headers=BROWSER_HEADERS)
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        data = json.loads(resp.read())
+    if data.get("status") != "ok":
+        raise ValueError(f"rss2json status={data.get('status')}")
+    items = []
+    for it in data.get("items", [])[:MAX_ARTICLES]:
+        image = it.get("thumbnail") or (it.get("enclosure") or {}).get("link") or ""
+        item = build_item(it.get("title"), it.get("link"),
+                          it.get("description"), it.get("content"),
+                          it.get("pubDate"), image)
+        if item:
+            items.append(item)
+    return items
+
+
+def get_items():
+    """Try the Substack feed directly (works locally / dependency-free); on any
+    failure fall back to rss2json (works from blocked datacenter IPs)."""
+    try:
+        print(f"Fetching {FEED_URL} directly ...")
+        items = items_from_xml(fetch_feed())
+        if items:
+            print(f"  source: direct RSS ({len(items)} articles)")
+            return items
+        print("  direct RSS returned 0 items; trying fallback ...")
+    except Exception as e:
+        print(f"  direct RSS failed ({e}); trying rss2json fallback ...")
+    items = items_from_rss2json()
+    print(f"  source: rss2json fallback ({len(items)} articles)")
     return items
 
 
@@ -303,9 +361,9 @@ def update_sitemap(items):
 
 
 def main():
-    print(f"Fetching {FEED_URL} ...")
-    items = parse_items(fetch_feed())
-    print(f"Parsed {len(items)} article(s).")
+    items = get_items()
+    if not items:
+        sys.exit("ERROR: no articles from any source; leaving files unchanged.")
 
     update_file("insights.html", "<!-- ARTICLES:START -->", "<!-- ARTICLES:END -->",
                 render_cards(items), "insights.html (articles)")
