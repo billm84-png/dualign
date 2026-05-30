@@ -20,6 +20,8 @@ import html
 import json
 import re
 import sys
+import time
+import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
@@ -45,10 +47,29 @@ TOPIC_RULES = [
 DEFAULT_TOPIC = "Leadership"
 
 
-def fetch_feed(url=FEED_URL):
-    req = urllib.request.Request(url, headers={"User-Agent": "DualignInsightsBot/1.0"})
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        return resp.read()
+# Substack sits behind Cloudflare, which 403s bot-like User-Agents from
+# datacenter IPs (e.g. GitHub Actions runners). Send realistic browser headers.
+BROWSER_HEADERS = {
+    "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                   "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"),
+    "Accept": "application/rss+xml, application/atom+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5",
+    "Accept-Language": "en-US,en;q=0.9",
+}
+
+
+def fetch_feed(url=FEED_URL, attempts=3):
+    last_err = None
+    for i in range(attempts):
+        req = urllib.request.Request(url, headers=BROWSER_HEADERS)
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                return resp.read()
+        except urllib.error.HTTPError as e:
+            last_err = e
+            if e.code not in (403, 429, 503) or i == attempts - 1:
+                raise
+            time.sleep(2 * (i + 1))
+    raise last_err
 
 
 def strip_html(raw):
