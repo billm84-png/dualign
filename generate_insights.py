@@ -79,6 +79,25 @@ def strip_html(raw):
     return re.sub(r"\s+", " ", text).strip()
 
 
+def normalize_image(url):
+    """Collapse a Substack CDN image URL to its underlying S3 original so the
+    value is identical no matter which source produced it. The direct feed and
+    rss2json wrap the same image with different Cloudflare transforms
+    ($s_ vs %24s_, w_1456, etc.); without this the two sources would fight over
+    insights.html on every alternating run."""
+    if not url:
+        return ""
+    marker = "/image/fetch/"
+    i = url.find(marker)
+    if i == -1:
+        return url
+    rest = url[i + len(marker):]
+    parts = rest.split("/", 1)  # [transform, encoded_original]
+    if len(parts) == 2 and ("%3A" in parts[1] or parts[1].startswith("http")):
+        return urllib.parse.unquote(parts[1])
+    return url
+
+
 def truncate_excerpt(desc):
     desc = (desc or "").strip()
     if len(desc) <= EXCERPT_CHARS:
@@ -135,7 +154,7 @@ def build_item(title, link, description_html, content_html, pub_raw, image):
         "link": link,
         "excerpt": truncate_excerpt(desc),
         "topic": pick_topic(title + " " + (description_html or "")),
-        "image": image or "",
+        "image": normalize_image(image),
         "date_human": dt.strftime("%B %-d, %Y") if dt else "",
         "date_iso": dt.date().isoformat() if dt else "",
     }
