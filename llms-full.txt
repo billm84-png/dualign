@@ -236,6 +236,18 @@ Bill Maggio brings DCSA, NISPOM, ITAR/EAR, and Government Security Committee exp
 
 ---
 
+<!-- insights:start -->
+## Writing & Insights
+
+Bill Maggio publishes long-form essays on leadership, operating discipline, culture, and AI governance. Read the full archive at https://williamjmaggio.substack.com/ or the curated list at https://dualign.io/insights.html.
+
+- **The Hollowed Pipeline** (May 20, 2026): When CEOs use AI productivity gains to justify reducing entry-level roles, they may be quietly eliminating the pipeline that produces the senior judgment they say they value most. https://williamjmaggio.substack.com/p/the-hollowed-pipeline
+- **The Unlearning Imperative** (May 13, 2026): Why Growth Mindset Is the One Leadership Capability That Makes All Others Possible in the Age of AI https://williamjmaggio.substack.com/p/the-unlearning-imperative
+- **Mentorship as the Moat** (May 6, 2026): Why Human Wisdom Cannot Be Automated and How Senior Leaders Build Legacies That Outlast Them https://williamjmaggio.substack.com/p/mentorship-as-the-moat
+<!-- insights:end -->
+
+---
+
 ## Site Pages
 
 - Home: https://dualign.io/
@@ -243,5 +255,6 @@ Bill Maggio brings DCSA, NISPOM, ITAR/EAR, and Government Security Committee exp
 - Services: https://dualign.io/services.html
 - Heart & Head Framework: https://dualign.io/framework.html
 - Executive Alignment Risk Scan: https://dualign.io/framework.html#assessment
+- Insights: https://dualign.io/insights.html
 - Contact: https://dualign.io/contact.html
 - Privacy Policy: https://dualign.io/privacy.html

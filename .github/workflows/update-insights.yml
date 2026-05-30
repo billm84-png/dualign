@@ -1,0 +1,48 @@
+name: Update Insights from Substack
+
+# Regenerates insights.html (plus llms-full.txt and sitemap.xml) from Bill's
+# Substack RSS feed, then commits any changes back to main. GitHub Pages
+# redeploys automatically on the new commit, so new essays appear hands-free.
+
+on:
+  schedule:
+    # Daily at 13:00 UTC. Substack posts ~weekly; daily keeps the site fresh
+    # within a day of publishing without hammering the feed.
+    - cron: "0 13 * * *"
+  workflow_dispatch: {}   # allow manual "Run workflow" from the Actions tab
+
+# Least-privilege: only what's needed to commit the regenerated files.
+permissions:
+  contents: write
+
+# Never let two runs push at once.
+concurrency:
+  group: update-insights
+  cancel-in-progress: false
+
+jobs:
+  update-insights:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Regenerate insights from RSS
+        run: python3 generate_insights.py
+
+      - name: Commit changes if the feed changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain insights.html llms-full.txt sitemap.xml)" ]; then
+            git add insights.html llms-full.txt sitemap.xml
+            git commit -m "Auto-update Insights from Substack feed"
+            git push
+          else
+            echo "No changes — feed is already in sync."
+          fi

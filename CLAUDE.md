@@ -19,9 +19,11 @@ No build tools, package manager, or local server required. Open any HTML file di
 
 ### File Layout
 
-- 7 HTML pages: `index.html`, `about.html`, `services.html`, `framework.html`, `contact.html`, `privacy.html`, `todo.html`
+- 8 HTML pages: `index.html`, `about.html`, `services.html`, `framework.html`, `contact.html`, `insights.html`, `privacy.html`, `todo.html` (plus `terms.html`)
 - `styles.css` — single stylesheet, CSS custom properties in `:root` for theming
 - `assessment.js` — interactive Executive Alignment Risk Scan (modal in `framework.html`)
+- `generate_insights.py` — regenerates the Insights page from the Substack RSS feed (see Insights Page section)
+- `.github/workflows/update-insights.yml` — scheduled GitHub Action that runs the generator and commits changes
 - `logo.png`, `headshot.jpg` — static assets
 - `CNAME` — GitHub Pages custom domain (`dualign.io`)
 - `GOOGLE_SHEETS_SETUP.md` — full backend setup guide (Google Apps Script, Gmail alias, sheet structure)
@@ -29,9 +31,9 @@ No build tools, package manager, or local server required. Open any HTML file di
 
 ### Key Patterns to Know
 
-**Nav and footer are duplicated across all HTML files.** There is no templating. When changing navigation links, footer content, or the mobile menu script, you must update every HTML file. The nav includes: Home, About, Services, Framework, Assessment, Contact. Privacy is footer-only, not in nav. `todo.html` is deliberately hidden from both nav and footer.
+**Nav and footer are duplicated across all HTML files.** There is no templating. When changing navigation links, footer content, or the mobile menu script, you must update every HTML file. The nav includes: Home, About, Services, Framework, Assessment, Insights, Contact. Insights also appears in the footer link list. Privacy/Terms are footer-only, not in nav. `todo.html` is deliberately hidden from both nav and footer.
 
-**`class="active"` on nav links**: about, services, framework, and contact pages each mark their own nav link with `class="active"`. `index.html`, `privacy.html`, and `todo.html` do not set an active nav link. Maintain this convention when editing nav markup.
+**`class="active"` on nav links**: about, services, framework, contact, and insights pages each mark their own nav link with `class="active"`. `index.html`, `privacy.html`, `terms.html`, and `todo.html` do not set an active nav link. Maintain this convention when editing nav markup.
 
 **`GOOGLE_SCRIPT_URL` is defined in three places** — it must stay in sync:
 - `assessment.js` (line 2, top-level const)
@@ -54,6 +56,20 @@ Six service cards, each following a consistent pattern: description of the engag
 6. **CEO/Founder Advisory — The Shadow COO**
 
 When editing service cards, preserve the `<strong>Outcome:</strong>` pattern and keep the description-then-outcome structure.
+
+### Insights Page (insights.html + generate_insights.py)
+
+The Insights page surfaces Bill's Substack essays (feed: `https://williamjmaggio.substack.com/feed`) as excerpt cards that link **out** to Substack. Substack stays canonical (grows subscribers, no duplicate-content penalty); the excerpts + JSON-LD live on dualign.io for SEO/AEO/GEO value.
+
+**Two regions of `insights.html` are machine-generated — do NOT hand-edit them.** They are delimited by HTML comment markers and overwritten on every generator run:
+- `<!-- ARTICLES:START -->` … `<!-- ARTICLES:END -->` — the `.insight-card` grid
+- `<!-- INSIGHTS-JSONLD:START -->` … `<!-- INSIGHTS-JSONLD:END -->` — the `Blog` + `BlogPosting` JSON-LD
+
+Everything else in `insights.html` (head, nav, footer, CTA) is hand-maintained like the other pages. The generator also rewrites a marker region in `llms-full.txt` (`<!-- insights:start -->` … `<!-- insights:end -->`) and the `insights.html` `<lastmod>` in `sitemap.xml`.
+
+`generate_insights.py` is **stdlib-only** (no pip installs) so it runs unchanged in CI. Topic labels are keyword-derived (no categories in the feed); excerpts come from the RSS `description` (the Substack subtitle). Regenerate manually with `python3 generate_insights.py`.
+
+**Automation:** `.github/workflows/update-insights.yml` runs the generator daily (13:00 UTC) and on manual dispatch, committing changes back to `main` so GitHub Pages redeploys. New essays appear without manual work. Card styling lives in `styles.css` under `/* Insights Page */` (`.insight-card`, `.insights-grid`, etc.).
 
 ### Assessment Flow (assessment.js + framework.html)
 

@@ -38,6 +38,7 @@ The Executive Alignment Risk Scan is a free 5-minute assessment that measures le
 - [Services](https://dualign.io/services.html)
 - [Heart & Head Framework](https://dualign.io/framework.html)
 - [Executive Alignment Risk Scan](https://dualign.io/framework.html#assessment)
+- [Insights](https://dualign.io/insights.html)
 - [Contact](https://dualign.io/contact.html)
 - [Privacy Policy](https://dualign.io/privacy.html)
 - [Full LLM Context](https://dualign.io/llms-full.txt)
