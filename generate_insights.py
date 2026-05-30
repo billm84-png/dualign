@@ -156,7 +156,8 @@ def build_item(title, link, description_html, content_html, pub_raw, image):
         "topic": pick_topic(title + " " + (description_html or "")),
         "image": normalize_image(image),
         "date_human": dt.strftime("%B %-d, %Y") if dt else "",
-        "date_iso": dt.date().isoformat() if dt else "",
+        "date_iso": dt.date().isoformat() if dt else "",          # date-only, for sitemap lastmod
+        "date_jsonld": dt.isoformat() if dt else "",              # full ISO-8601 w/ tz, for datePublished
     }
 
 
@@ -294,8 +295,8 @@ def render_jsonld(items):
                 "name": "Dualign",
             },
         }
-        if a["date_iso"]:
-            post["datePublished"] = a["date_iso"]
+        if a["date_jsonld"]:
+            post["datePublished"] = a["date_jsonld"]
         if a["image"]:
             post["image"] = a["image"]
         blog_posts.append(post)

@@ -24,6 +24,7 @@ No build tools, package manager, or local server required. Open any HTML file di
 - `assessment.js` — interactive Executive Alignment Risk Scan (modal in `framework.html`)
 - `generate_insights.py` — regenerates the Insights page from the Substack RSS feed (see Insights Page section)
 - `.github/workflows/update-insights.yml` — scheduled GitHub Action that runs the generator and commits changes
+- `add_linkedin.py` + `linkedin_posts.json` — curated manager for the homepage "Latest Insights" LinkedIn cards (see LinkedIn Latest Insights section)
 - `logo.png`, `headshot.jpg` — static assets
 - `CNAME` — GitHub Pages custom domain (`dualign.io`)
 - `GOOGLE_SHEETS_SETUP.md` — full backend setup guide (Google Apps Script, Gmail alias, sheet structure)
@@ -75,6 +76,15 @@ Everything else in `insights.html` (head, nav, footer, CTA) is hand-maintained l
 **Feed fetch has a fallback (this matters):** Substack sits behind Cloudflare, which **403s the GitHub Actions datacenter IPs** (works locally, fails in CI — the block is IP-based, not User-Agent). So `get_items()` tries the Substack feed directly first (used for local runs), then falls back to **rss2json** (`api.rss2json.com`, free tier, no key) which fetches server-side from an unblocked IP. Both sources normalize through `build_item()` to the same dict. Image URLs are collapsed to their underlying S3 original by `normalize_image()` because the two sources wrap images with different Cloudflare transforms — without that, `insights.html` would flip-flop on every alternating local/CI run. Output is idempotent across both sources.
 
 **Automation:** `.github/workflows/update-insights.yml` runs the generator daily (13:00 UTC) and on manual dispatch, committing changes back to `main` so GitHub Pages redeploys. New essays appear without manual work. Card styling lives in `styles.css` under `/* Insights Page */` (`.insight-card`, `.insights-grid`, etc.).
+
+### LinkedIn Latest Insights (index.html + add_linkedin.py)
+
+The homepage "Latest Insights" section (the LinkedIn one, distinct from the Substack "Long-Form Essays" teaser below it) is **curated, not auto-fed** — LinkedIn has no usable public RSS for a personal profile and no official API for member feeds. `linkedin_posts.json` is the source of truth (newest first). `add_linkedin.py` regenerates three marker-delimited regions from it so they never drift:
+- `index.html` `<!-- LINKEDIN-CARDS:START/END -->` — the visible `.linkedin-card` cards
+- `index.html` `<!-- LINKEDIN-JSONLD:START/END -->` — the `ItemList` JSON-LD
+- `llms-full.txt` `<!-- linkedin:start/end -->` — the AI-search list
+
+**Do not hand-edit those regions** — edit `linkedin_posts.json` (or use the script) and re-render. Only the newest `--max` (default 3) posts show on the homepage; older entries stay archived in the JSON. Usage: `python3 add_linkedin.py <url> --topic "Leadership" --title "…" --blurb "…"` (also `--render`, `--list`, `--remove <url>`, best-effort `--fetch`). Stdlib-only. The intended flow: paste the post URL to Claude → Claude reads it (WebFetch works on individual LinkedIn post URLs) and drafts title/blurb in Bill's voice → runs the script. This satisfies the [[#Branding]] voice rules and keeps editorial control over what reaches the homepage.
 
 ### Assessment Flow (assessment.js + framework.html)
 
