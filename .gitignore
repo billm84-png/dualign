@@ -10,6 +10,10 @@ Thumbs.db
 *.swo
 *~
 
+# Python (generate_insights.py byproducts)
+__pycache__/
+*.pyc
+
 # Backup assets
 headshot-old.jpg
 logo-old.png
