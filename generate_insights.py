@@ -204,21 +204,69 @@ def items_from_rss2json():
     return items
 
 
+def items_from_allorigins():
+    """Second CI fallback (for when rss2json is down). allorigins fetches the
+    feed server-side from an unblocked IP and returns the raw page wrapped in
+    JSON under .contents; we hand that XML to the same parser the direct path
+    uses. It's flaky under load, so callers retry."""
+    url = "https://api.allorigins.win/get?url=" + urllib.parse.quote(FEED_URL, safe="")
+    req = urllib.request.Request(url, headers=BROWSER_HEADERS)
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        data = json.loads(resp.read())
+    contents = (data.get("contents") or "").lstrip()
+    if not (contents.startswith("<?xml") or "<rss" in contents[:200]):
+        raise ValueError("allorigins returned no usable RSS XML")
+    return items_from_xml(contents.encode("utf-8"))
+
+
+class FeedUnavailable(RuntimeError):
+    """No source could supply the feed — a transient network / upstream outage,
+    not a bug. The caller leaves the committed page untouched and exits clean."""
+
+
+def _try_source(name, fn, attempts=3):
+    """Run a fetch function, retrying transient failures with linear backoff.
+    Returns a non-empty item list, or None if every attempt failed."""
+    last_err = None
+    for i in range(attempts):
+        try:
+            items = fn()
+            if items:
+                return items
+            last_err = ValueError("returned 0 items")
+        except Exception as e:  # noqa: BLE001 — any failure means "try next source"
+            last_err = e
+        if i < attempts - 1:
+            time.sleep(2 * (i + 1))
+    print(f"  {name} failed after {attempts} attempt(s): {last_err}")
+    return None
+
+
 def get_items():
-    """Try the Substack feed directly (works locally / dependency-free); on any
-    failure fall back to rss2json (works from blocked datacenter IPs)."""
-    try:
-        print(f"Fetching {FEED_URL} directly ...")
-        items = items_from_xml(fetch_feed())
+    """Fetch the feed, trying sources in order of preference until one yields
+    items:
+      1. Substack directly — works locally; 403s from CI datacenter IPs.
+      2. rss2json          — server-side fetch from an unblocked IP.
+      3. allorigins        — second server-side proxy; flaky, so retried.
+    Multiple independent fallbacks mean one provider being down (e.g. rss2json
+    returning HTTP 500) no longer breaks the run. If every source fails, raise
+    FeedUnavailable so the workflow can stay green rather than crash."""
+    print(f"Fetching {FEED_URL} directly ...")
+    # fetch_feed() already retries internally, so don't double-retry direct.
+    items = _try_source("direct RSS", lambda: items_from_xml(fetch_feed()), attempts=1)
+    if items:
+        print(f"  source: direct RSS ({len(items)} articles)")
+        return items
+
+    print("  direct RSS unavailable; trying server-side proxies ...")
+    for name, fn in (("rss2json", items_from_rss2json),
+                     ("allorigins", items_from_allorigins)):
+        items = _try_source(name, fn)
         if items:
-            print(f"  source: direct RSS ({len(items)} articles)")
+            print(f"  source: {name} ({len(items)} articles)")
             return items
-        print("  direct RSS returned 0 items; trying fallback ...")
-    except Exception as e:
-        print(f"  direct RSS failed ({e}); trying rss2json fallback ...")
-    items = items_from_rss2json()
-    print(f"  source: rss2json fallback ({len(items)} articles)")
-    return items
+
+    raise FeedUnavailable("all feed sources failed (direct, rss2json, allorigins)")
 
 
 def render_cards(items):
@@ -383,7 +431,15 @@ def update_sitemap(items):
 
 
 def main():
-    items = get_items()
+    try:
+        items = get_items()
+    except FeedUnavailable as e:
+        # Upstream feed + all proxies are temporarily unreachable. The committed
+        # page is still valid, so don't fail the workflow over a transient
+        # outage — emit a GitHub Actions warning annotation and exit cleanly.
+        # The next scheduled run will pick up any new essays.
+        print(f"::warning::Insights not updated this run — {e}")
+        return
     if not items:
         sys.exit("ERROR: no articles from any source; leaving files unchanged.")
 
