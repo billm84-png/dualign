@@ -3816,7 +3816,7 @@ body {
 /* --- Navigation: slimmer, executive --- */
 nav {
     padding: 0.6rem 2rem;
-    background: rgba(255, 255, 255, 0.97);
+    background: #ffffff;
     border-bottom: 1px solid var(--border);
 }
 
@@ -3857,51 +3857,57 @@ nav {
     border-radius: var(--radius-sm);
 }
 
-/* --- Hero: editorial, operator-first --- */
+/* --- Hero: the dark cover slide. Navy like the deck covers the
+       style guide specifies, faint operating-chart grid, blue glow. --- */
 .hero {
     min-height: auto;
-    padding: 10rem 2rem 5rem;
+    padding: 9.5rem 2rem 5.5rem;
     background:
-        radial-gradient(1100px 500px at 85% -10%, rgba(20, 100, 180, 0.07), transparent 60%),
-        var(--bg-white);
-    border-bottom: 1px solid var(--border);
+        radial-gradient(900px 480px at 78% 8%, rgba(20, 100, 180, 0.28), transparent 62%),
+        radial-gradient(700px 420px at 12% 96%, rgba(220, 40, 40, 0.10), transparent 60%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 56px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 56px),
+        linear-gradient(160deg, #0f1f3f 0%, var(--primary) 55%, #1a3462 100%);
+    border-bottom: none;
 }
 
 .hero-content .hero-eyebrow {
-    color: var(--accent);
-    font-size: 0.8rem;
-    letter-spacing: 0.14em;
+    color: #8ab8e8;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
 }
 
 .hero-content h1 {
-    font-size: 3.6rem;
-    line-height: 1.08;
+    font-size: 3.7rem;
+    line-height: 1.07;
     margin-bottom: 1.25rem;
+    color: #ffffff;
 }
 
 .hero-content .tagline {
-    font-size: 1.2rem;
+    font-size: 1.18rem;
     line-height: 1.65;
     max-width: 540px;
-    color: var(--text-medium);
+    color: rgba(233, 240, 249, 0.88);
 }
 
 .hero-philosophy {
     max-width: 540px;
     padding-left: 1.1rem;
-    border-left: 3px solid var(--accent);
+    border-left: 3px solid var(--head-light);
+    color: rgba(233, 240, 249, 0.72);
 }
 
 .hero-proof {
     font-size: 1rem;
-    color: var(--text-dark);
+    color: #ffffff;
     font-weight: 500;
     max-width: 540px;
-    margin-bottom: 2rem;
+    margin-bottom: 2.25rem;
 }
 
 .hero-proof .proof-sep {
-    color: var(--accent);
+    color: var(--head-light);
     padding: 0 0.4rem;
 }
 
@@ -3909,8 +3915,8 @@ nav {
     display: inline-flex;
     flex-wrap: wrap;
     align-items: baseline;
-    margin-top: 0.3rem;
-    color: var(--text-medium);
+    margin-top: 0.35rem;
+    color: rgba(233, 240, 249, 0.65);
     font-size: 0.92rem;
     letter-spacing: 0.02em;
 }
@@ -3919,98 +3925,104 @@ nav {
     white-space: nowrap;
 }
 
-/* --- Hero visual: the duality mark (two overlapping disciplines) --- */
+/* Buttons on the dark hero */
+.hero .cta-button {
+    background: #ffffff;
+    color: var(--primary);
+}
+
+.hero .cta-button:hover {
+    background: #dfe8f4;
+    transform: translateY(-2px);
+}
+
+.hero .cta-button.secondary {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.55);
+    color: #ffffff;
+}
+
+.hero .cta-button.secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+/* --- Hero visual: the clarity lens. Heart and Head as luminous
+       discs; where they overlap, the lens reads white — operational
+       clarity. SVG lives inline in index.html. --- */
 .duality-mark {
     position: relative;
     width: 100%;
-    max-width: 420px;
-    aspect-ratio: 1;
+    max-width: 460px;
     display: block;
     text-decoration: none;
 }
 
-.duality-mark .ring {
-    position: absolute;
-    width: 62%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    top: 19%;
+.duality-mark svg {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
-.duality-mark .ring.heart-ring {
-    left: 0;
-    border: 2.5px solid rgba(220, 40, 40, 0.55);
-    background: radial-gradient(circle at 35% 35%, rgba(220, 40, 40, 0.08), transparent 65%);
-}
-
-.duality-mark .ring.head-ring {
-    right: 0;
-    border: 2.5px solid rgba(20, 100, 180, 0.6);
-    background: radial-gradient(circle at 65% 35%, rgba(20, 100, 180, 0.08), transparent 65%);
-}
-
-.duality-mark .ring-label {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.duality-mark .ring-label.heart-label {
-    left: 9%;
-    color: var(--heart);
-}
-
-.duality-mark .ring-label.head-label {
-    right: 10%;
-    color: var(--head);
-}
-
-.duality-mark .mark-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.duality-mark .mark-caption {
+    display: block;
     text-align: center;
-    width: 46%;
+    margin-top: 0.75rem;
 }
 
-.duality-mark .mark-center .framework {
+.duality-mark .mark-caption .framework {
+    display: block;
     font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--text-light);
-    margin-bottom: 0.4rem;
+    color: rgba(233, 240, 249, 0.55);
+    margin-bottom: 0.3rem;
 }
 
-.duality-mark .mark-center .framework-name {
+.duality-mark .mark-caption .framework-name {
+    display: block;
     font-family: var(--font-display);
-    font-size: 1.45rem;
+    font-size: 1.35rem;
     font-weight: 600;
-    color: var(--primary);
-    line-height: 1.25;
+    color: #ffffff;
+    line-height: 1.3;
 }
 
-.duality-mark .mark-center .click-hint {
-    font-size: 0.78rem;
-    color: var(--accent);
-    margin-top: 0.6rem;
+.duality-mark .mark-caption .click-hint {
+    display: inline-block;
+    font-size: 0.82rem;
+    color: #8ab8e8;
+    margin-top: 0.45rem;
     font-weight: 500;
-    opacity: 0;
-    transition: opacity 0.25s;
+    border-bottom: 1px solid transparent;
+    transition: color 0.25s, border-color 0.25s;
 }
 
-.duality-mark:hover .mark-center .click-hint {
+.duality-mark:hover .mark-caption .click-hint {
+    color: #ffffff;
+    border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.duality-mark .lens-group {
+    opacity: 0;
+    animation: lens-reveal 1.4s ease 0.5s forwards;
+}
+
+.duality-mark:hover .lens-group {
     opacity: 1;
 }
 
-.duality-mark:hover .ring.heart-ring,
-.duality-mark:hover .ring.head-ring {
-    border-width: 3px;
+@keyframes lens-reveal {
+    to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .duality-mark .lens-group {
+        animation: none;
+        opacity: 1;
+    }
 }
 
 /* --- Page headers (inner pages) --- */
@@ -4023,21 +4035,59 @@ nav {
     font-size: 3.1rem;
 }
 
-/* --- Credibility bar: boardroom numbers --- */
+/* --- Credibility bar: boardroom numbers on paper, following the
+       dark cover slide (light content slides, per the style guide) --- */
 .credibility-bar {
-    padding: 2.75rem 2rem;
-    background:
-        linear-gradient(150deg, var(--primary) 0%, var(--primary-light) 100%);
+    padding: 3rem 2rem;
+    background: var(--bg-white);
+    border-bottom: 1px solid var(--border);
+}
+
+.credibility-container {
+    max-width: 1000px;
+}
+
+.cred-item {
+    color: var(--text-medium);
 }
 
 .cred-number {
     font-family: var(--font-display);
-    font-size: 2.6rem;
+    font-size: 2.9rem;
     font-weight: 600;
+    color: var(--primary);
 }
 
 .cred-label {
     letter-spacing: 0.09em;
+    color: var(--accent);
+    opacity: 1;
+    font-weight: 600;
+}
+
+.cred-context {
+    color: var(--text-light);
+    opacity: 1;
+}
+
+.cred-divider {
+    background: var(--border);
+}
+
+/* --- Section eyebrows: briefing numbering --- */
+.section-eyebrow {
+    text-align: center;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.85rem;
+}
+
+.section-eyebrow .eyebrow-num {
+    color: var(--heart);
+    padding-right: 0.55rem;
 }
 
 /* --- Cards: accent-bar language from the style guide --- */
@@ -4051,26 +4101,55 @@ nav {
 }
 
 .familiar-item {
-    border-left: 3px solid var(--border);
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--heart);
+    padding: 1.9rem 1.9rem 1.9rem 2.1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.familiar-item::before {
+    content: '\201C';
+    position: absolute;
+    top: 0.4rem;
+    left: 0.85rem;
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--heart);
+    opacity: 0.28;
 }
 
 .familiar-item:hover {
-    border-left-color: var(--heart);
-    box-shadow: 0 10px 30px rgba(20, 40, 80, 0.08);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(20, 40, 80, 0.1);
 }
 
 .familiar-icon {
+    position: absolute;
+    top: 1.4rem;
+    right: 1.4rem;
+    width: 34px;
+    height: 34px;
     background: var(--bg-light);
-    color: var(--primary);
+    color: var(--accent);
     border-radius: var(--radius-sm);
+    margin-bottom: 0;
+    opacity: 0.85;
+}
+
+.familiar-icon svg {
+    width: 17px;
+    height: 17px;
 }
 
 .familiar-item p {
-    font-style: normal;
+    font-style: italic;
     font-family: var(--font-display);
-    font-size: 1.05rem;
+    font-size: 1.12rem;
+    line-height: 1.55;
     color: var(--text-dark);
+    padding-right: 2.6rem;
 }
 
 .linkedin-card,
@@ -4150,22 +4229,31 @@ footer {
         padding: 7.5rem 1.5rem 3rem;
     }
 
-    .hero-content h1 {
-        font-size: 2.3rem;
-        line-height: 1.15;
-    }
-
-    .hero-philosophy {
+    .hero-container {
         text-align: left;
     }
 
-    .duality-rule {
+    .hero-content h1 {
+        font-size: 2.35rem;
+        line-height: 1.12;
+    }
+
+    .hero-buttons {
+        justify-content: flex-start;
+    }
+
+    .hero .duality-rule {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .duality-rule.centered {
         margin-left: auto;
         margin-right: auto;
     }
 
     .hero .duality-mark {
-        max-width: 300px;
+        max-width: 320px;
         margin: 0 auto;
     }
 
