@@ -3885,10 +3885,15 @@ nav {
 }
 
 .hero-content .tagline {
-    font-size: 1.18rem;
-    line-height: 1.65;
-    max-width: 540px;
+    font-size: 1.05rem;
+    line-height: 1.62;
+    max-width: 560px;
     color: rgba(233, 240, 249, 0.88);
+    margin-bottom: 0.9rem;
+}
+
+.hero-content .tagline:first-of-type {
+    font-size: 1.16rem;
 }
 
 .hero-philosophy {
