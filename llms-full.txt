@@ -10,7 +10,7 @@ Tagline: "Leadership in Balance"
 
 ## About Dualign
 
-Dualign is an executive and strategic advisory firm built for leaders navigating high-stakes transitions. We help founders, CEOs, owners, and boards translate strategy into operational clarity, strengthen execution discipline, and build leadership alignment that holds under pressure.
+Dualign is an executive and strategic advisory firm built for leaders navigating high-stakes transitions. We help founders, CEOs, owners, and boards turn strategy into execution that holds, strengthen operating discipline, and build leadership alignment that survives pressure.
 
 Our approach balances "Head" and "Heart": analytical rigor, decision rights, and operating cadence, paired with trust, transparency, and culture. The result is simple, repeatable operating systems that improve decision velocity, accountability, and measurable outcomes to maximize shareholder value.
 
@@ -63,11 +63,11 @@ Five Heart dimensions:
 5. Transformation Without Cultural Fracture
 
 ### Head — Decision Discipline
-Rigorous analysis drives sound decisions. Data-informed strategy, systematic execution, and continuous optimization. The discipline to measure what matters and the clarity to communicate complex ideas simply.
+Rigorous analysis drives sound decisions. Data-informed strategy, systematic execution, and continuous optimization. The discipline to measure what matters and the skill to communicate complex ideas simply.
 
 Five Head dimensions:
 1. Data-Driven Decision Discipline
-2. Strategic Clarity & Decision Rights
+2. Strategic Focus & Decision Rights
 3. Operating Cadence & Accountability
 4. Scalable Systems Architecture
 5. Measurable Outcome Tracking
