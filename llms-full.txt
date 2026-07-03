@@ -1,6 +1,6 @@
 # Dualign — Full Context for LLMs
 
-> Executive and strategic advisory firm helping CEOs, founders, and boards of $5M-$500M companies align leadership behavior with enterprise strategy — so performance accelerates without cultural fracture.
+> Executive and strategic advisory firm helping CEOs, founders, owners, and boards of $5M-$500M companies align leadership behavior with enterprise strategy — so performance accelerates without cultural fracture.
 
 Website: https://dualign.io
 Legal Entity: TDM Solutions LLC, doing business as Dualign
@@ -10,7 +10,7 @@ Tagline: "Leadership in Balance"
 
 ## About Dualign
 
-Dualign is an executive and strategic advisory firm built for leaders navigating inflection points. We help founders, CEOs, and boards translate strategy into operational clarity, strengthen execution discipline, and build leadership alignment that holds under pressure.
+Dualign is an executive and strategic advisory firm built for leaders navigating high-stakes transitions. We help founders, CEOs, owners, and boards translate strategy into operational clarity, strengthen execution discipline, and build leadership alignment that holds under pressure.
 
 Our approach balances "Head" and "Heart": analytical rigor, decision rights, and operating cadence, paired with trust, transparency, and culture. The result is simple, repeatable operating systems that improve decision velocity, accountability, and measurable outcomes to maximize shareholder value.
 
@@ -20,7 +20,7 @@ We work alongside leadership teams as operator-partners, not spectators, bringin
 
 ## About Bill Maggio — Founder & Managing Partner
 
-Bill Maggio has spent more than 30 years building businesses and leading teams through inflection points. His executive career spans roles as a founder, divisional leader, CTO, COO, and CEO.
+Bill Maggio has spent more than 30 years building businesses and leading teams through high-stakes transitions. His executive career spans roles as a founder, divisional leader, CTO, COO, and CEO.
 
 ### Key Credentials
 - Led a $450M+ global organization across 36 countries and 3,200+ employees
@@ -91,7 +91,7 @@ Five Head dimensions:
 
 ## Services
 
-### 1. Inflection-Point Strategy & 90-Day Operating Plan
+### 1. High-Stakes Transition Strategy & 90-Day Operating Plan
 *Strategic Engagement*
 
 Turn strategic intent into a 90-day execution plan with decision rights, clear owners, and measurable targets.
@@ -137,7 +137,7 @@ High-cadence 1-on-1 advisory & mentoring for the CEO who needs unfiltered truth,
 
 ## Ideal Clients
 
-For-profit companies between $5M and $500M in revenue navigating critical inflection points:
+For-profit companies between $5M and $500M in revenue navigating high-stakes transitions:
 - Post-acquisition integration
 - Leadership transitions
 - Rapid scaling
@@ -207,7 +207,7 @@ Dualign doesn't deliver reports and disappear. As an operator-partner, we embed 
 Fractional means you get senior executive leadership — the experience, judgment, and operating discipline of a seasoned CEO, COO or CTO — without the full-time salary, equity, or commitment. You get the right level of leadership for the stage you're in.
 
 **What is the "Founder Gap" and how do I know if I'm in it?**
-The Founder Gap is the inflection point where founder-led intuition starts to break down, but the professional systems needed to replace it haven't been built yet. It often shows up as accountability gaps, missed commitments, or a growing sense that the old way of running things isn't scaling.
+The Founder Gap is the moment where founder-led intuition starts to break down, but the professional systems needed to replace it haven't been built yet. It often shows up as accountability gaps, missed commitments, or a growing sense that the old way of running things isn't scaling.
 
 **How do I know if the timing is right to bring in a strategic advisor or fractional executive?**
 The right moment is usually a trigger event: a recent acquisition, a leadership departure, a board mandate you don't have the internal bandwidth to execute, or a scaling challenge that's outpaced your current team.

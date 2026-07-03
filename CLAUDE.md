@@ -49,7 +49,7 @@ All three POST to the same Google Apps Script endpoint. The script routes by `ty
 
 Six service cards, each following a consistent pattern: description of the engagement → bold **Outcome:** statement. All six cards must have an Outcome. The current card names are:
 
-1. **Inflection-Point Strategy & 90-Day Operating Plan**
+1. **High-Stakes Transition Strategy & 90-Day Operating Plan**
 2. **Operating Rhythm & Execution Discipline**
 3. **Fractional COO/CTO — Embedded Operating Leadership**
 4. **AI Governance & Operationalization**

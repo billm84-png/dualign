@@ -3821,7 +3821,7 @@ nav {
 }
 
 .logo img {
-    height: 64px;
+    height: 80px;
 }
 
 .nav-links a {
@@ -4025,14 +4025,24 @@ nav {
     }
 }
 
-/* --- Page headers (inner pages) --- */
+/* --- Page headers (inner pages): same navy cover treatment as the hero --- */
 .page-header {
-    padding: 9.5rem 2rem 1.5rem;
-    background: var(--bg-white);
+    padding: 9.5rem 2rem 3.25rem;
+    background:
+        radial-gradient(800px 380px at 80% 0%, rgba(20, 100, 180, 0.26), transparent 62%),
+        radial-gradient(600px 320px at 8% 100%, rgba(220, 40, 40, 0.08), transparent 60%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 56px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 56px),
+        linear-gradient(160deg, #0f1f3f 0%, var(--primary) 55%, #1a3462 100%);
 }
 
 .page-header h1 {
     font-size: 3.1rem;
+    color: #ffffff;
+}
+
+.page-header p {
+    color: rgba(233, 240, 249, 0.82);
 }
 
 /* --- Credibility bar: boardroom numbers on paper, following the
@@ -4218,7 +4228,7 @@ footer {
 /* --- Responsive adjustments for the new scale --- */
 @media (max-width: 768px) {
     .logo img {
-        height: 52px;
+        height: 62px;
     }
 
     nav {
