@@ -5,20 +5,25 @@
 }
 
 :root {
-    --primary: #1a365d;
-    --primary-light: #2c5282;
-    --accent: #3182ce;
-    --heart: #e53e3e;
-    --heart-light: #fc8181;
-    --head: #3182ce;
-    --head-light: #63b3ed;
-    --text-dark: #1a202c;
-    --text-medium: #4a5568;
-    --text-light: #718096;
-    --bg-light: #f7fafc;
+    /* Dualign Style Guide v1.1 palette */
+    --primary: #142850;        /* Navy — headings, covers, table headers */
+    --primary-light: #1e3a6e;
+    --accent: #1464B4;         /* Blue — Head accent, links, callouts */
+    --heart: #DC2828;          /* Red — Heart accent, use sparingly */
+    --heart-light: #e96b6b;
+    --head: #1464B4;
+    --head-light: #5a9bd8;
+    --text-dark: #142850;
+    --text-medium: #3C5078;    /* Slate — body text */
+    --text-light: #64748f;
+    --bg-light: #F4F6F9;       /* Light blue — section backgrounds */
     --bg-white: #ffffff;
-    --border: #e2e8f0;
+    --border: #dde3ec;
     --success: #38a169;
+    --font-display: 'Source Serif 4', Cambria, Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --radius-sm: 3px;
+    --radius: 6px;
 }
 
 html {
@@ -26,7 +31,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-body);
     line-height: 1.6;
     color: var(--text-dark);
 }
@@ -969,7 +974,7 @@ section {
 
 /* Assessment CTA Section */
 .assessment-cta {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(150deg, var(--primary) 0%, var(--primary-light) 60%, var(--accent) 130%);
     color: white;
     text-align: center;
 }
@@ -997,7 +1002,7 @@ section {
 
 .assessment-cta .cta-button {
     background: white;
-    color: #667eea;
+    color: var(--primary);
     padding: 1.25rem 2.5rem;
     font-size: 1.1rem;
 }
@@ -2871,7 +2876,7 @@ footer p {
 /* Final CTA Section */
 .final-cta {
     padding: 6rem 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(150deg, var(--primary) 0%, var(--primary-light) 60%, var(--accent) 130%);
     color: white;
 }
 
@@ -2898,7 +2903,7 @@ footer p {
 
 .final-cta .cta-button {
     background: white;
-    color: #667eea;
+    color: var(--primary);
 }
 
 .final-cta .cta-button:hover {
@@ -3748,4 +3753,435 @@ footer p {
     .todo-delete-btn {
         opacity: 1;
     }
+}
+
+/* ============================================================
+   REDESIGN 2026 — "The Operator's Briefing"
+   Editorial refresh: Style Guide v1.1 palette, Source Serif 4
+   display type, slimmer nav, duality-rule motif, accent bars.
+   This layer overrides earlier rules by cascade order — the
+   original component CSS above is intentionally untouched.
+   ============================================================ */
+
+/* --- Typography: serif display, refined scale --- */
+h1, h2,
+.hero-content h1,
+.page-header h1,
+.section-header h2,
+.heart-head-difference-container h2,
+.familiar-container h2,
+.testimonials-container h2,
+.linkedin-insights-container h2,
+.final-cta-content h2,
+.assessment-cta h2,
+.faq-container h2,
+.framework-section h2,
+.value-header h2,
+.about-text h3,
+.proven-theses h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.linkedin-card h3,
+.insight-card h3,
+.service-card h3,
+.testimonial-card blockquote,
+.social-proof-quote blockquote,
+.hero-quote-card blockquote {
+    font-family: var(--font-display);
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* --- The duality rule: Heart | Head signature motif --- */
+.duality-rule {
+    display: block;
+    width: 56px;
+    height: 3px;
+    margin: 1.1rem 0 1.4rem;
+    background: linear-gradient(90deg, var(--heart) 0 50%, var(--head) 50% 100%);
+    border-radius: 2px;
+}
+
+.duality-rule.centered {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Navigation: slimmer, executive --- */
+nav {
+    padding: 0.6rem 2rem;
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid var(--border);
+}
+
+.logo img {
+    height: 64px;
+}
+
+.nav-links a {
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.nav-links a.active {
+    color: var(--primary);
+    border-bottom-color: var(--accent);
+}
+
+/* --- Buttons: rectangular, decisive --- */
+.cta-button {
+    border-radius: var(--radius-sm);
+    padding: 0.95rem 1.9rem;
+    font-size: 0.98rem;
+    letter-spacing: 0.01em;
+}
+
+.cta-button.secondary {
+    border-width: 1.5px;
+}
+
+.sticky-cta-button {
+    border-radius: var(--radius-sm);
+}
+
+/* --- Hero: editorial, operator-first --- */
+.hero {
+    min-height: auto;
+    padding: 10rem 2rem 5rem;
+    background:
+        radial-gradient(1100px 500px at 85% -10%, rgba(20, 100, 180, 0.07), transparent 60%),
+        var(--bg-white);
+    border-bottom: 1px solid var(--border);
+}
+
+.hero-content .hero-eyebrow {
+    color: var(--accent);
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+}
+
+.hero-content h1 {
+    font-size: 3.6rem;
+    line-height: 1.08;
+    margin-bottom: 1.25rem;
+}
+
+.hero-content .tagline {
+    font-size: 1.2rem;
+    line-height: 1.65;
+    max-width: 540px;
+    color: var(--text-medium);
+}
+
+.hero-philosophy {
+    max-width: 540px;
+    padding-left: 1.1rem;
+    border-left: 3px solid var(--accent);
+}
+
+.hero-proof {
+    font-size: 1rem;
+    color: var(--text-dark);
+    font-weight: 500;
+    max-width: 540px;
+    margin-bottom: 2rem;
+}
+
+.hero-proof .proof-sep {
+    color: var(--accent);
+    padding: 0 0.4rem;
+}
+
+.hero-proof .proof-stats {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    margin-top: 0.3rem;
+    color: var(--text-medium);
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+}
+
+.hero-proof .proof-stats > span:not(.proof-sep) {
+    white-space: nowrap;
+}
+
+/* --- Hero visual: the duality mark (two overlapping disciplines) --- */
+.duality-mark {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1;
+    display: block;
+    text-decoration: none;
+}
+
+.duality-mark .ring {
+    position: absolute;
+    width: 62%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    top: 19%;
+}
+
+.duality-mark .ring.heart-ring {
+    left: 0;
+    border: 2.5px solid rgba(220, 40, 40, 0.55);
+    background: radial-gradient(circle at 35% 35%, rgba(220, 40, 40, 0.08), transparent 65%);
+}
+
+.duality-mark .ring.head-ring {
+    right: 0;
+    border: 2.5px solid rgba(20, 100, 180, 0.6);
+    background: radial-gradient(circle at 65% 35%, rgba(20, 100, 180, 0.08), transparent 65%);
+}
+
+.duality-mark .ring-label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.duality-mark .ring-label.heart-label {
+    left: 9%;
+    color: var(--heart);
+}
+
+.duality-mark .ring-label.head-label {
+    right: 10%;
+    color: var(--head);
+}
+
+.duality-mark .mark-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 46%;
+}
+
+.duality-mark .mark-center .framework {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.4rem;
+}
+
+.duality-mark .mark-center .framework-name {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.25;
+}
+
+.duality-mark .mark-center .click-hint {
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin-top: 0.6rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.duality-mark:hover .mark-center .click-hint {
+    opacity: 1;
+}
+
+.duality-mark:hover .ring.heart-ring,
+.duality-mark:hover .ring.head-ring {
+    border-width: 3px;
+}
+
+/* --- Page headers (inner pages) --- */
+.page-header {
+    padding: 9.5rem 2rem 1.5rem;
+    background: var(--bg-white);
+}
+
+.page-header h1 {
+    font-size: 3.1rem;
+}
+
+/* --- Credibility bar: boardroom numbers --- */
+.credibility-bar {
+    padding: 2.75rem 2rem;
+    background:
+        linear-gradient(150deg, var(--primary) 0%, var(--primary-light) 100%);
+}
+
+.cred-number {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    font-weight: 600;
+}
+
+.cred-label {
+    letter-spacing: 0.09em;
+}
+
+/* --- Cards: accent-bar language from the style guide --- */
+.familiar-item,
+.linkedin-card,
+.insight-card,
+.service-card,
+.testimonial-card {
+    border-radius: var(--radius);
+    box-shadow: none;
+}
+
+.familiar-item {
+    border-left: 3px solid var(--border);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.familiar-item:hover {
+    border-left-color: var(--heart);
+    box-shadow: 0 10px 30px rgba(20, 40, 80, 0.08);
+}
+
+.familiar-icon {
+    background: var(--bg-light);
+    color: var(--primary);
+    border-radius: var(--radius-sm);
+}
+
+.familiar-item p {
+    font-style: normal;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--text-dark);
+}
+
+.linkedin-card,
+.insight-card {
+    border-left: 3px solid transparent;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.linkedin-card:hover,
+.insight-card:hover {
+    border-left-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(20, 40, 80, 0.1);
+}
+
+/* --- Testimonials: editorial pull-quotes --- */
+.testimonial-card {
+    border: none;
+    border-left: 3px solid var(--heart);
+    background: var(--bg-light);
+}
+
+.testimonial-card blockquote {
+    font-size: 1.08rem;
+    line-height: 1.55;
+    font-style: italic;
+    color: var(--text-dark);
+}
+
+.testimonial-card .quote-mark {
+    color: var(--heart);
+    opacity: 0.35;
+}
+
+/* --- Section rhythm --- */
+.heart-head-difference {
+    background: var(--bg-white);
+    border-top: none;
+}
+
+.heart-head-difference-container h2,
+.familiar-container h2,
+.testimonials-container h2,
+.linkedin-insights-container h2 {
+    font-size: 2.3rem;
+}
+
+/* --- Final CTA polish --- */
+.final-cta-content h2 {
+    font-size: 2.4rem;
+}
+
+.preview-quadrant {
+    border-radius: var(--radius);
+}
+
+/* --- Footer --- */
+footer {
+    border-top: 3px solid var(--accent);
+}
+
+.footer-brand {
+    font-family: var(--font-display);
+}
+
+/* --- Responsive adjustments for the new scale --- */
+@media (max-width: 768px) {
+    .logo img {
+        height: 52px;
+    }
+
+    nav {
+        padding: 0.55rem 1.25rem;
+    }
+
+    .hero {
+        padding: 7.5rem 1.5rem 3rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.3rem;
+        line-height: 1.15;
+    }
+
+    .hero-philosophy {
+        text-align: left;
+    }
+
+    .duality-rule {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero .duality-mark {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .page-header {
+        padding: 7.5rem 1.5rem 0.75rem;
+    }
+
+    .page-header h1 {
+        font-size: 2.1rem;
+    }
+
+    .cred-number {
+        font-size: 2.1rem;
+    }
+}
+
+.page-header .duality-rule {
+    margin: 0.25rem auto 1.25rem;
 }
