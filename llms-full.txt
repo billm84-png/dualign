@@ -243,6 +243,7 @@ Bill Maggio brings DCSA, NISPOM, ITAR/EAR, and Government Security Committee exp
 
 Bill Maggio publishes long-form essays on leadership, operating discipline, culture, and AI governance. Read the full archive at https://williamjmaggio.substack.com/ or the curated list at https://dualign.io/insights.html.
 
+- **The First 24 Hours: How Leaders Reveal Whether They Earn Trust or Demand It** (July 20, 2026): It's not the mistake that costs you a team's trust, it's what you do in the first 24 hours after you know you got it wrong. https://williamjmaggio.substack.com/p/the-first-24-hours-how-leaders-reveal
 - **The Rep You Didn't Notice You Skipped** (July 19, 2026): Why handing a routine draft to AI can feel like smart delegation while quietly erasing the small reps that build a leader's judgment over time. https://williamjmaggio.substack.com/p/the-rep-you-didnt-notice-you-skipped
 - **Good Judgment Runs on a Maintenance Schedule** (July 14, 2026): Good judgment isn't a trait you either have or lack, it's three unglamorous practices, run on a cadence, that keep it from quietly eroding. https://williamjmaggio.substack.com/p/good-judgment-runs-on-a-maintenance
 - **The Board Approved a Presentation, Not a Decision** (July 7, 2026): When AI makes every deck look flawless, the four questions that separate a decision from an approved presentation, and what happens eighteen months later if nobody asks them https://williamjmaggio.substack.com/p/the-board-approved-a-presentation
@@ -252,7 +253,6 @@ Bill Maggio publishes long-form essays on leadership, operating discipline, cult
 - **Trust Is Built in Unplanned Leadership Moments** (June 12, 2026): Why the four minutes after someone knocks on your door with a real problem tells your team more about your culture than any values initiative you've ever run. https://williamjmaggio.substack.com/p/trust-is-built-in-unplanned-leadership
 - **Between Right and Right: How Senior Leaders Navigate the Gray** (June 5, 2026): Three real situations where the analysis was clear, the right answer wasn't, and what it actually took to make a defensible call. https://williamjmaggio.substack.com/p/between-right-and-right-how-senior
 - **The Hollowed Pipeline** (May 20, 2026): When CEOs use AI productivity gains to justify reducing entry-level roles, they may be quietly eliminating the pipeline that produces the senior judgment they say they value most. https://williamjmaggio.substack.com/p/the-hollowed-pipeline
-- **The Unlearning Imperative** (May 13, 2026): Why Growth Mindset Is the One Leadership Capability That Makes All Others Possible in the Age of AI https://williamjmaggio.substack.com/p/the-unlearning-imperative
 <!-- insights:end -->
 
 ---
