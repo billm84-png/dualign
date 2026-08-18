@@ -243,6 +243,7 @@ Bill Maggio brings DCSA, NISPOM, ITAR/EAR, and Government Security Committee exp
 
 Bill Maggio publishes long-form essays on leadership, operating discipline, culture, and AI governance. Read the full archive at https://williamjmaggio.substack.com/ or the curated list at https://dualign.io/insights.html.
 
+- **Everyone Agreed the Account Was Fine** (August 17, 2026): What a monthly client health rubric taught me about the gap between what delivery sees and what sales hears, and why that gap matters more than any composite score. https://williamjmaggio.substack.com/p/everyone-agreed-the-account-was-fine
 - **You Can't Pull Five Years of Data on a Job That's Five Months Old** (August 12, 2026): Why succession plans built on old track records can't predict success in roles that have steadily absorbed data governance, AI oversight, and risk work nobody wrote into the job description. https://williamjmaggio.substack.com/p/you-cant-pull-five-years-of-data
 - **Four Announcements, One Question I Kept Missing** (August 3, 2026): Four announcements I made as a senior leader, and the one question underneath each of them that I answered late, half-answered, or missed completely. https://williamjmaggio.substack.com/p/four-announcements-one-question-i
 - **When a Good Quarter Hides a Failing System** (July 23, 2026): Three ways a strong quarter borrows from the future, and why the CEO has to surface them before the board deck buries them. https://williamjmaggio.substack.com/p/when-a-good-quarter-hides-a-failing
@@ -252,7 +253,6 @@ Bill Maggio publishes long-form essays on leadership, operating discipline, cult
 - **The Board Approved a Presentation, Not a Decision** (July 7, 2026): When AI makes every deck look flawless, the four questions that separate a decision from an approved presentation, and what happens eighteen months later if nobody asks them https://williamjmaggio.substack.com/p/the-board-approved-a-presentation
 - **Integrity First: The Leadership Principle You Can't Outsource** (June 29, 2026): AI now runs the numbers, scores the options, and hands you a recommendation that already looks objective. The one thing it can never hold is accountability for the call. That still belongs to you. https://williamjmaggio.substack.com/p/integrity-first-the-leadership-principle
 - **The Asset You Don't Manage** (June 27, 2026): Senior executives apply rigorous allocation discipline to every organizational resource except the one that determines the quality of every decision they make. https://williamjmaggio.substack.com/p/the-asset-you-dont-manage
-- **She Did Everything Right** (June 22, 2026): What fifteen years of reliable delivery cost one high performer and what the organizations behind her owe people they optimized instead of grew. https://williamjmaggio.substack.com/p/she-did-everything-right
 <!-- insights:end -->
 
 ---
