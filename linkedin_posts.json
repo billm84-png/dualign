@@ -1,5 +1,29 @@
 [
   {
+    "url": "https://www.linkedin.com/feed/update/urn:li:activity:7511775404471238656/",
+    "topic": "Leadership",
+    "title": "Accountability Is the Skill Leaders Rate Lowest in Themselves.",
+    "blurb": "Gallup ranked seven core leadership competencies, and leaders rated themselves lowest on creating accountability. When a standard gets missed and the leader lets it go, because the timing is bad or the person is otherwise strong, the standard survives in name only. The people who still meet it notice. Before diagnosing the team, the audit starts with the leader: is the expectation named plainly, and does anyone follow through when it's missed?"
+  },
+  {
+    "url": "https://www.linkedin.com/feed/update/urn:li:activity:7511400991930576896/",
+    "topic": "Leadership",
+    "title": "Capture Judgment While the Person Is Still Deciding.",
+    "blurb": "At GP Strategies, a senior operations leader about 18 months from retirement had her named successor sit with her through real decisions for several months, in place of a handover in the final weeks. He heard why a vendor threshold sat where it did and the near-failure that put it there, and he saw a decision reversed in real time. The practice had an owner, a modest time commitment and an end date tied to her departure. Most organizations skip it because it's in no one's job description."
+  },
+  {
+    "url": "https://www.linkedin.com/feed/update/urn:li:activity:7511036260514213889/",
+    "topic": "Decision-Making",
+    "title": "Four Kinds of Judgment a Handover Document Misses.",
+    "blurb": "A handover document records what was decided. Rejections, thresholds, exceptions and reversals rarely make it in: the option someone passed on, the near-miss behind a specification, the case where the rule doesn't apply, and the change of course everything since has run on. The gap between the record and the capability is where both successor failure and AI underperformance start. By the time the output visibly degrades, the chance to capture the reasoning has usually passed."
+  },
+  {
+    "url": "https://www.linkedin.com/feed/update/urn:li:activity:7510811576413777920/",
+    "topic": "AI Governance",
+    "title": "Ford Kept the Documentation and Lost the Judgment.",
+    "blurb": "Ford's plan was to feed its existing design requirements into AI quality inspection and produce a better product. When the experienced engineers left, the specs and records stayed, and the standard each engineer held against the work left with them. Ford ended up hiring 350 veteran engineers, many of them former employees, to find failure points before parts reach the plant floor. What a person knows on record and the capability they hold are two different assets, and most organizations have a system for only the first."
+  },
+  {
     "url": "https://www.linkedin.com/feed/update/urn:li:activity:7501642340634226690/",
     "topic": "Leadership",
     "title": "Unlearning Is the Harder Discipline.",
