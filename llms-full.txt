@@ -243,6 +243,7 @@ Bill Maggio brings DCSA, NISPOM, ITAR/EAR, and Government Security Committee exp
 
 Bill Maggio publishes long-form essays on leadership, operating discipline, culture, and AI governance. Read the full archive at https://williamjmaggio.substack.com/ or the curated list at https://dualign.io/insights.html.
 
+- **The Supervised Middle: Why AI Agent Returns Are Lagging** (October 17, 2026): Companies are paying for agent autonomy, then have capable people approving every step, and the way out is a leadership decision made one task at a time. https://williamjmaggio.substack.com/p/the-supervised-middle-why-ai-agent
 - **Building a Board That Makes You Better: A Founder-CEO's Guide to Board Architecture** (October 12, 2026): Most founder-CEOs at the lower middle market ($15M–$60M) stage have the paperwork for a board but not the structure that makes one worth having. https://williamjmaggio.substack.com/p/building-a-board-that-makes-you-better
 - **The People Who Knew What Good Looked Like** (September 29, 2026): Ford rehired 350 engineers to recover what their documentation never contained, and the same gap is inside every succession plan that looks complete on paper. https://williamjmaggio.substack.com/p/the-people-who-knew-what-good-looked
 - **The Decisions We Let Happen** (September 23, 2026): Most leadership failures aren't bad decisions. They're decisions that were never made at all, just absorbed by the people closest to the work. https://williamjmaggio.substack.com/p/the-decisions-we-let-happen
@@ -252,7 +253,6 @@ Bill Maggio publishes long-form essays on leadership, operating discipline, cult
 - **You Can't Pull Five Years of Data on a Job That's Five Months Old** (August 12, 2026): Why succession plans built on old track records can't predict success in roles that have steadily absorbed data governance, AI oversight, and risk work nobody wrote into the job description. https://williamjmaggio.substack.com/p/you-cant-pull-five-years-of-data
 - **Four Announcements, One Question I Kept Missing** (August 3, 2026): Four announcements I made as a senior leader, and the one question underneath each of them that I answered late, half-answered, or missed completely. https://williamjmaggio.substack.com/p/four-announcements-one-question-i
 - **When a Good Quarter Hides a Failing System** (July 23, 2026): Three ways a strong quarter borrows from the future, and why the CEO has to surface them before the board deck buries them. https://williamjmaggio.substack.com/p/when-a-good-quarter-hides-a-failing
-- **The First 24 Hours: How Leaders Reveal Whether They Earn Trust or Demand It** (July 20, 2026): It's not the mistake that costs you a team's trust, it's what you do in the first 24 hours after you know you got it wrong. https://williamjmaggio.substack.com/p/the-first-24-hours-how-leaders-reveal
 <!-- insights:end -->
 
 ---
