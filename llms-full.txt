@@ -243,6 +243,8 @@ Bill Maggio brings DCSA, NISPOM, ITAR/EAR, and Government Security Committee exp
 
 Bill Maggio publishes long-form essays on leadership, operating discipline, culture, and AI governance. Read the full archive at https://williamjmaggio.substack.com/ or the curated list at https://dualign.io/insights.html.
 
+- **The Cuts Got a Quick Yes** (October 28, 2026): Cost cuts got approved fast. Growth investments got approved slowly, with an asterisk. Over time that gap became the strategy, and it tested what we said we stood for. https://williamjmaggio.substack.com/p/the-cuts-got-a-quick-yes
+- **What the Team Hears When the Strategy Lands** (October 23, 2026): The week after a strategy announcement decides how much effort people put behind it, and the leader with the clearest view of the plan is most likely to miss it. https://williamjmaggio.substack.com/p/what-the-team-hears-when-the-strategy
 - **The Supervised Middle: Why AI Agent Returns Are Lagging** (October 17, 2026): Companies are paying for agent autonomy, then have capable people approving every step, and the way out is a leadership decision made one task at a time. https://williamjmaggio.substack.com/p/the-supervised-middle-why-ai-agent
 - **Building a Board That Makes You Better: A Founder-CEO's Guide to Board Architecture** (October 12, 2026): Most founder-CEOs at the lower middle market ($15M–$60M) stage have the paperwork for a board but not the structure that makes one worth having. https://williamjmaggio.substack.com/p/building-a-board-that-makes-you-better
 - **The People Who Knew What Good Looked Like** (September 29, 2026): Ford rehired 350 engineers to recover what their documentation never contained, and the same gap is inside every succession plan that looks complete on paper. https://williamjmaggio.substack.com/p/the-people-who-knew-what-good-looked
@@ -251,8 +253,6 @@ Bill Maggio publishes long-form essays on leadership, operating discipline, cult
 - **The Laptop Approval That Taught Me Everything About Delegation** (August 31, 2026): A $5k laptop approval taught me more about delegation, escalation, and the limits of my own authority than any leadership workshop ever did. https://williamjmaggio.substack.com/p/the-laptop-approval-that-taught-me
 - **Everyone Agreed the Account Was Fine** (August 17, 2026): What a monthly client health rubric taught me about the gap between what delivery sees and what sales hears, and why that gap matters more than any composite score. https://williamjmaggio.substack.com/p/everyone-agreed-the-account-was-fine
 - **You Can't Pull Five Years of Data on a Job That's Five Months Old** (August 12, 2026): Why succession plans built on old track records can't predict success in roles that have steadily absorbed data governance, AI oversight, and risk work nobody wrote into the job description. https://williamjmaggio.substack.com/p/you-cant-pull-five-years-of-data
-- **Four Announcements, One Question I Kept Missing** (August 3, 2026): Four announcements I made as a senior leader, and the one question underneath each of them that I answered late, half-answered, or missed completely. https://williamjmaggio.substack.com/p/four-announcements-one-question-i
-- **When a Good Quarter Hides a Failing System** (July 23, 2026): Three ways a strong quarter borrows from the future, and why the CEO has to surface them before the board deck buries them. https://williamjmaggio.substack.com/p/when-a-good-quarter-hides-a-failing
 <!-- insights:end -->
 
 ---
