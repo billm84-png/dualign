@@ -243,6 +243,7 @@ Bill Maggio brings DCSA, NISPOM, ITAR/EAR, and Government Security Committee exp
 
 Bill Maggio publishes long-form essays on leadership, operating discipline, culture, and AI governance. Read the full archive at https://williamjmaggio.substack.com/ or the curated list at https://dualign.io/insights.html.
 
+- **The Doubt No One Reports** (November 6, 2026): The people closest to the work know where the AI output is wrong, and whether they say so depends on what happened to the first person who spoke up. https://williamjmaggio.substack.com/p/the-doubt-no-one-reports
 - **The Cuts Got a Quick Yes** (October 28, 2026): Cost cuts got approved fast. Growth investments got approved slowly, with an asterisk. Over time that gap became the strategy, and it tested what we said we stood for. https://williamjmaggio.substack.com/p/the-cuts-got-a-quick-yes
 - **What the Team Hears When the Strategy Lands** (October 23, 2026): The week after a strategy announcement decides how much effort people put behind it, and the leader with the clearest view of the plan is most likely to miss it. https://williamjmaggio.substack.com/p/what-the-team-hears-when-the-strategy
 - **The Supervised Middle: Why AI Agent Returns Are Lagging** (October 17, 2026): Companies are paying for agent autonomy, then have capable people approving every step, and the way out is a leadership decision made one task at a time. https://williamjmaggio.substack.com/p/the-supervised-middle-why-ai-agent
@@ -252,7 +253,6 @@ Bill Maggio publishes long-form essays on leadership, operating discipline, cult
 - **Which Decisions Are Still Yours** (September 13, 2026): A decision-rights framework for executives and boards who need to know, before the pressure arrives, which judgments no algorithm can own. https://williamjmaggio.substack.com/p/which-decisions-are-still-yours
 - **The Laptop Approval That Taught Me Everything About Delegation** (August 31, 2026): A $5k laptop approval taught me more about delegation, escalation, and the limits of my own authority than any leadership workshop ever did. https://williamjmaggio.substack.com/p/the-laptop-approval-that-taught-me
 - **Everyone Agreed the Account Was Fine** (August 17, 2026): What a monthly client health rubric taught me about the gap between what delivery sees and what sales hears, and why that gap matters more than any composite score. https://williamjmaggio.substack.com/p/everyone-agreed-the-account-was-fine
-- **You Can't Pull Five Years of Data on a Job That's Five Months Old** (August 12, 2026): Why succession plans built on old track records can't predict success in roles that have steadily absorbed data governance, AI oversight, and risk work nobody wrote into the job description. https://williamjmaggio.substack.com/p/you-cant-pull-five-years-of-data
 <!-- insights:end -->
 
 ---
